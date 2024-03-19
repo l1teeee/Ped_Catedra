@@ -9,5 +9,6 @@ namespace Ped_Catedra
     internal class Prioridad
     {
         int id;
+        string prioridad;
     }
 }
