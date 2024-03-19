@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Ped_Catedra
 {
-    public partial class Form1 : Form
+    public partial class Memberme : Form
     {
-        public Form1()
+        public Memberme()
         {
             InitializeComponent();
         }
