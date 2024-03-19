@@ -24,16 +24,9 @@ namespace Ped_Catedra
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // Crear una instancia del formulario modal
             Modal modalForm = new Modal();
-
-            // Establecer la opacidad del formulario principal al 10%
-            this.Opacity = 0.6;
-
-            // Mostrar el formulario modal
+            this.Opacity = 0.2;
             modalForm.ShowDialog();
-
-            // Restaurar la opacidad del formulario principal al 100% después de cerrar el formulario modal
             this.Opacity = 1.0;
         }
 
