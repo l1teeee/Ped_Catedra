@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ped_Catedra
 {
-    internal class Prioridad
+    public class Prioridad
     {
-        int id;
-        string prioridad;
+        private int id;
+        public string prioridad;
+        public string color;
     }
 }
