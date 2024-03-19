@@ -12,6 +12,6 @@ namespace Ped_Catedra
         public string prioridad;
         public string color;
         string colores;
-
+        string prueba; /*PRUEBA */
     }
 }
