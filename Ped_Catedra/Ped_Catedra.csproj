@@ -66,6 +66,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -79,6 +80,32 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MaterialSymbolsChecklist %286%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\2560x1440-space-pattern-texture-4k_1669770354.jpg" />
+    <Content Include="Resources\Captura de pantalla 2024-03-18 235120.png" />
+    <Content Include="Resources\Captura de pantalla 2024-03-18 235255.png" />
+    <Content Include="Resources\Captura de pantalla 2024-03-18 235743.png" />
+    <Content Include="Resources\Captura de pantalla 2024-03-19 001450.png" />
+    <Content Include="Resources\Captura de pantalla 2024-03-19 001627.png" />
+    <Content Include="Resources\fondo.jpg" />
+    <None Include="Resources\MaterialSymbolsCheckBoxOutlineRounded.png" />
+    <Content Include="Resources\MaterialSymbolsChecklist %281%29.png" />
+    <Content Include="Resources\MaterialSymbolsChecklist %282%29.png" />
+    <Content Include="Resources\MaterialSymbolsChecklist %283%29.png" />
+    <Content Include="Resources\MaterialSymbolsChecklist %284%29.png" />
+    <Content Include="Resources\MaterialSymbolsChecklist %285%29.png" />
+    <None Include="Resources\MaterialSymbolsChecklist %287%29.png" />
+    <Content Include="Resources\MaterialSymbolsChecklist.png" />
+    <None Include="Resources\MaterialSymbolsChecklistRounded.png" />
+    <Content Include="Resources\mim360.jpg" />
+    <Content Include="Resources\mim600.jpg" />
+    <None Include="Resources\PhGridNine.png" />
+    <None Include="Resources\PhGridNine %281%29.png" />
+    <Content Include="Resources\space-pattern-texture-4k_1669770354.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
