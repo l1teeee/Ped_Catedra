@@ -11,5 +11,7 @@ namespace Ped_Catedra
         private int id;
         public string prioridad;
         public string color;
+        string pene;
+
     }
 }
