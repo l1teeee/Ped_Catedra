@@ -63,7 +63,6 @@ namespace Ped_Catedra
                 return;
             }
 
-            // Encriptar la contraseña
             string contraseñaEncriptada = EncriptarContraseña(nuevoUsuario.contraseña);
 
             using (MySqlConnection conexion = ObtenerConexion())

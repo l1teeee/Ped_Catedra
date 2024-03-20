@@ -87,13 +87,8 @@ namespace Ped_Catedra
                 // Crear una instancia del formulario Modal
                 Modal form1 = new Modal();
 
-                // Configurar la propiedad Usuario en el Form1
                 form1.Usuario = usuario;
-
-                // Mostrar el formulario Modal
                 form1.Show();
-
-                // Opcionalmente, puedes ocultar este formulario de inicio de sesión
                 this.Hide();
             }
             else
