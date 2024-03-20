@@ -83,10 +83,10 @@ namespace Ped_Catedra
 
             if (count > 0)
             {
-                MessageBox.Show("¡Inicio de sesión exitoso!");
+                MessageBox.Show("¡Inicio de sesión exitoso!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Crear una instancia del formulario Form1
-                Memberme form1 = new Memberme();
+                Modal form1 = new Modal();
 
                 // Configurar la propiedad Usuario en el Form1
                 form1.Usuario = usuario;
@@ -99,7 +99,7 @@ namespace Ped_Catedra
             }
             else
             {
-                MessageBox.Show("Usuario o contraseña incorrectos");
+                MessageBox.Show("Usuario o contraseña incorrectos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

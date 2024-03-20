@@ -25,11 +25,11 @@ namespace Ped_Catedra
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Modal modalForm = new Modal(dgvRecordatorio);
+            Modal modalForm = new Modal();
             this.Opacity = 0.2;
-            modalForm.ShowDialog();
+            modalForm.Show();
             this.Opacity = 1.0;
-            modalForm.Enabled = true;
+            
         }
 
         private void dgvRecordatorio_CellContentClick(object sender, DataGridViewCellEventArgs e)

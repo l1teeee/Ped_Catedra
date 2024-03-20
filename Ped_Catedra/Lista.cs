@@ -75,6 +75,7 @@ namespace Ped_Catedra
                     aux = punteroposterior;
                     punteroanterior.siguiente = punteroanterior.siguiente;
                 }
+                MessageBox.Show("¡Recordatorio eliminado!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.totalnodos--;
                 return aux;
             }
@@ -95,7 +96,6 @@ namespace Ped_Catedra
             tabla.Columns.Add("Fecha", "Fecha");
             tabla.Columns.Add("Hora", "Hora");
             tabla.Columns.Add("Descripción", "Descripción");
-            tabla.Columns.Add("Objetivos", "Objetivos");
             int contador = 1;
 
 
@@ -103,7 +103,7 @@ namespace Ped_Catedra
             while (puntero != null)
             {
                 tabla.Rows.Add(contador++, puntero.recordatorio.titulo, puntero.recordatorio.prioridad, puntero.recordatorio.fecha,
-                    puntero.recordatorio.hora, puntero.recordatorio.descripcion, puntero.recordatorio.objetivos);
+                    puntero.recordatorio.hora, puntero.recordatorio.descripcion);
                 puntero = puntero.siguiente;
             }
         }
