@@ -83,7 +83,6 @@ namespace Ped_Catedra
 
             if (count > 0)
             {
-                MessageBox.Show("¡Inicio de sesión exitoso!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Crear una instancia del formulario Form1
                 Modal form1 = new Modal();
