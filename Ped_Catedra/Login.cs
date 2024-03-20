@@ -81,7 +81,13 @@ namespace Ped_Catedra
                 MessageBox.Show("¡Usuario o Contraseña incorrecta!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+
             
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
