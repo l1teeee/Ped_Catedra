@@ -12,28 +12,22 @@ namespace Ped_Catedra
 {
     public partial class Memberme : Form
     {
-        Modal modalForm = new Modal();
-
+        Lista list;
         public Memberme()
         {
             InitializeComponent();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
+            list = new Lista();
+            list.Mostrar(dgvRecordatorio);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Modal modalForm = new Modal(dgvRecordatorio);
             this.Opacity = 0.2;
             modalForm.ShowDialog();
             this.Opacity = 1.0;
+            this.Close();
         }
 
-        private void Memberme_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

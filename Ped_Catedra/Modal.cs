@@ -12,15 +12,25 @@ namespace Ped_Catedra
 {
     public partial class Modal : Form
     {
+        private Lista list;
+        Memberme mainMenu;
         public Modal()
         {
             InitializeComponent();
+            cmbPrioridad.SelectedIndex = 0;
+            list = new Lista();
+            mainMenu = new Memberme();
+        }
+
+        public Modal(DataGridView tabla)
+        {
+            
         }
 
         private void btnCloseModal_Click(object sender, EventArgs e)
         {
 
-            Memberme mainMenu = new Memberme();
+            
 
             // Cerrar el formulario modal
             this.Close();
@@ -29,19 +39,20 @@ namespace Ped_Catedra
             mainMenu.Enabled = true;
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void btnIngresar_Click(object sender, EventArgs e)
         {
+            Recordatorio recordatorio = new Recordatorio();
 
+            recordatorio.titulo = txtTitulo.Text;
+            recordatorio.fecha = date.Value.Date.ToString();
+            recordatorio.hora = time.Value.TimeOfDay.ToString();
+            recordatorio.prioridad = cmbPrioridad.Text;
+            recordatorio.descripcion = txtDescri.Text;
+
+            list.Insertar(recordatorio);
+            list.Mostrar(dataGridView1);
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void Modal_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

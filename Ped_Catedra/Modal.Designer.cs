@@ -29,16 +29,18 @@
         private void InitializeComponent()
         {
             this.btnCloseModal = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.txtUsu = new System.Windows.Forms.TextBox();
+            this.btnIngresar = new System.Windows.Forms.Button();
+            this.txtTitulo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbPrioridad = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.date = new System.Windows.Forms.DateTimePicker();
+            this.time = new System.Windows.Forms.DateTimePicker();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtDescri = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCloseModal
@@ -52,28 +54,29 @@
             this.btnCloseModal.UseVisualStyleBackColor = true;
             this.btnCloseModal.Click += new System.EventHandler(this.btnCloseModal_Click);
             // 
-            // button1
+            // btnIngresar
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button1.Location = new System.Drawing.Point(307, 279);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Ingresar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnIngresar.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnIngresar.Location = new System.Drawing.Point(307, 279);
+            this.btnIngresar.Name = "btnIngresar";
+            this.btnIngresar.Size = new System.Drawing.Size(75, 23);
+            this.btnIngresar.TabIndex = 1;
+            this.btnIngresar.Text = "Ingresar";
+            this.btnIngresar.UseVisualStyleBackColor = true;
+            this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
             // 
-            // txtUsu
+            // txtTitulo
             // 
-            this.txtUsu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-            this.txtUsu.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtUsu.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsu.ForeColor = System.Drawing.Color.DimGray;
-            this.txtUsu.Location = new System.Drawing.Point(46, 48);
-            this.txtUsu.Name = "txtUsu";
-            this.txtUsu.Size = new System.Drawing.Size(145, 19);
-            this.txtUsu.TabIndex = 2;
-            this.txtUsu.TabStop = false;
-            this.txtUsu.Text = "TITULO";
+            this.txtTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+            this.txtTitulo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtTitulo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTitulo.ForeColor = System.Drawing.Color.DimGray;
+            this.txtTitulo.Location = new System.Drawing.Point(46, 48);
+            this.txtTitulo.Name = "txtTitulo";
+            this.txtTitulo.Size = new System.Drawing.Size(145, 19);
+            this.txtTitulo.TabIndex = 2;
+            this.txtTitulo.TabStop = false;
+            this.txtTitulo.Text = "TITULO";
             // 
             // label1
             // 
@@ -84,22 +87,21 @@
             this.label1.Size = new System.Drawing.Size(151, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "________________________";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // comboBox1
+            // cmbPrioridad
             // 
-            this.comboBox1.BackColor = System.Drawing.SystemColors.ControlText;
-            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox1.ForeColor = System.Drawing.SystemColors.Menu;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cmbPrioridad.BackColor = System.Drawing.SystemColors.ControlText;
+            this.cmbPrioridad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbPrioridad.ForeColor = System.Drawing.SystemColors.Menu;
+            this.cmbPrioridad.FormattingEnabled = true;
+            this.cmbPrioridad.Items.AddRange(new object[] {
             "Alta",
             "Media",
             "Baja"});
-            this.comboBox1.Location = new System.Drawing.Point(307, 63);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(145, 21);
-            this.comboBox1.TabIndex = 4;
+            this.cmbPrioridad.Location = new System.Drawing.Point(307, 63);
+            this.cmbPrioridad.Name = "cmbPrioridad";
+            this.cmbPrioridad.Size = new System.Drawing.Size(145, 21);
+            this.cmbPrioridad.TabIndex = 4;
             // 
             // textBox1
             // 
@@ -115,30 +117,30 @@
             this.textBox1.TabStop = false;
             this.textBox1.Text = "PRIORIDAD";
             // 
-            // dateTimePicker1
+            // date
             // 
-            this.dateTimePicker1.CalendarMonthBackground = System.Drawing.SystemColors.MenuText;
-            this.dateTimePicker1.CalendarTitleBackColor = System.Drawing.SystemColors.ButtonFace;
-            this.dateTimePicker1.CalendarTrailingForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.dateTimePicker1.Location = new System.Drawing.Point(46, 148);
-            this.dateTimePicker1.MaxDate = new System.DateTime(2024, 12, 31, 0, 0, 0, 0);
-            this.dateTimePicker1.MinDate = new System.DateTime(2024, 3, 19, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(208, 20);
-            this.dateTimePicker1.TabIndex = 6;
+            this.date.CalendarMonthBackground = System.Drawing.SystemColors.MenuText;
+            this.date.CalendarTitleBackColor = System.Drawing.SystemColors.ButtonFace;
+            this.date.CalendarTrailingForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.date.Location = new System.Drawing.Point(46, 148);
+            this.date.MaxDate = new System.DateTime(2024, 12, 31, 0, 0, 0, 0);
+            this.date.MinDate = new System.DateTime(2024, 3, 19, 0, 0, 0, 0);
+            this.date.Name = "date";
+            this.date.Size = new System.Drawing.Size(208, 20);
+            this.date.TabIndex = 6;
             // 
-            // dateTimePicker2
+            // time
             // 
-            this.dateTimePicker2.CalendarMonthBackground = System.Drawing.SystemColors.MenuText;
-            this.dateTimePicker2.CalendarTitleBackColor = System.Drawing.SystemColors.ButtonFace;
-            this.dateTimePicker2.CalendarTrailingForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker2.Location = new System.Drawing.Point(46, 174);
-            this.dateTimePicker2.MaxDate = new System.DateTime(2024, 12, 31, 0, 0, 0, 0);
-            this.dateTimePicker2.MinDate = new System.DateTime(2024, 3, 19, 0, 0, 0, 0);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(130, 20);
-            this.dateTimePicker2.TabIndex = 7;
+            this.time.CalendarMonthBackground = System.Drawing.SystemColors.MenuText;
+            this.time.CalendarTitleBackColor = System.Drawing.SystemColors.ButtonFace;
+            this.time.CalendarTrailingForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.time.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.time.Location = new System.Drawing.Point(46, 174);
+            this.time.MaxDate = new System.DateTime(2024, 12, 31, 0, 0, 0, 0);
+            this.time.MinDate = new System.DateTime(2024, 3, 19, 0, 0, 0, 0);
+            this.time.Name = "time";
+            this.time.Size = new System.Drawing.Size(130, 20);
+            this.time.TabIndex = 7;
             // 
             // textBox2
             // 
@@ -154,20 +156,19 @@
             this.textBox2.TabStop = false;
             this.textBox2.Text = "FECHA Y HORA";
             // 
-            // textBox3
+            // txtDescri
             // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.ForeColor = System.Drawing.Color.DimGray;
-            this.textBox3.Location = new System.Drawing.Point(307, 147);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox3.Size = new System.Drawing.Size(245, 80);
-            this.textBox3.TabIndex = 9;
-            this.textBox3.TabStop = false;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.txtDescri.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+            this.txtDescri.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDescri.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescri.ForeColor = System.Drawing.Color.DimGray;
+            this.txtDescri.Location = new System.Drawing.Point(307, 147);
+            this.txtDescri.Multiline = true;
+            this.txtDescri.Name = "txtDescri";
+            this.txtDescri.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtDescri.Size = new System.Drawing.Size(245, 80);
+            this.txtDescri.TabIndex = 9;
+            this.txtDescri.TabStop = false;
             // 
             // textBox4
             // 
@@ -183,29 +184,38 @@
             this.textBox4.TabStop = false;
             this.textBox4.Text = "DESCRIPCIÓN";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(34, 405);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(530, 150);
+            this.dataGridView1.TabIndex = 11;
+            // 
             // Modal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-            this.ClientSize = new System.Drawing.Size(612, 329);
+            this.ClientSize = new System.Drawing.Size(612, 583);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtDescri);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.time);
+            this.Controls.Add(this.date);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbPrioridad);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtUsu);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txtTitulo);
+            this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.btnCloseModal);
             this.ForeColor = System.Drawing.SystemColors.Control;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Modal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modal";
-            this.Load += new System.EventHandler(this.Modal_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,15 +224,16 @@
         #endregion
 
         private System.Windows.Forms.Button btnCloseModal;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox txtUsu;
+        private System.Windows.Forms.Button btnIngresar;
+        private System.Windows.Forms.TextBox txtTitulo;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbPrioridad;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker date;
+        private System.Windows.Forms.DateTimePicker time;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtDescri;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
