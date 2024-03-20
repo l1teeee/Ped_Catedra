@@ -35,6 +35,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dgvRecordatorio = new System.Windows.Forms.DataGridView();
+            this.idUsu = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -126,6 +127,16 @@
             this.dgvRecordatorio.Name = "dgvRecordatorio";
             this.dgvRecordatorio.Size = new System.Drawing.Size(721, 240);
             this.dgvRecordatorio.TabIndex = 11;
+            this.dgvRecordatorio.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecordatorio_CellContentClick);
+            // 
+            // idUsu
+            // 
+            this.idUsu.AutoSize = true;
+            this.idUsu.Location = new System.Drawing.Point(35, 234);
+            this.idUsu.Name = "idUsu";
+            this.idUsu.Size = new System.Drawing.Size(35, 13);
+            this.idUsu.TabIndex = 12;
+            this.idUsu.Text = "label2";
             // 
             // Memberme
             // 
@@ -134,6 +145,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(780, 515);
+            this.Controls.Add(this.idUsu);
             this.Controls.Add(this.dgvRecordatorio);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.label1);
@@ -146,6 +158,7 @@
             this.Name = "Memberme";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Member me";
+            this.Load += new System.EventHandler(this.Memberme_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -163,6 +176,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.DataGridView dgvRecordatorio;
+        private System.Windows.Forms.Label idUsu;
     }
 }
 

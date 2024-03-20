@@ -85,6 +85,10 @@ namespace Ped_Catedra
                 MessageBox.Show("¡Inicio de sesión exitoso!");
 
                 // Crear una instancia del formulario Form1
+                Memberme form1 = new Memberme();
+
+                // Configurar la propiedad Usuario en el Form1
+                form1.Usuario = usuario;
 
                 // Mostrar el formulario Form1
                 form1.Show();
@@ -97,6 +101,8 @@ namespace Ped_Catedra
                 MessageBox.Show("Usuario o contraseña incorrectos");
             }
         }
+
+
 
 
 

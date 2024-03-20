@@ -12,6 +12,9 @@ namespace Ped_Catedra
 {
     public partial class Memberme : Form
     {
+
+        public string Usuario { get; set; }
+
         Lista list;
         public Memberme()
         {
@@ -29,5 +32,20 @@ namespace Ped_Catedra
             this.Close();
         }
 
+        private void dgvRecordatorio_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Mostrar el ID del usuario en el label idUsu
+        }
+
+        private void Memberme_Load(object sender, EventArgs e)
+        {
+            idUsu.Text = Usuario;
+
+        }
     }
 }
