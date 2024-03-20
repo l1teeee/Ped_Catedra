@@ -139,8 +139,10 @@ namespace Ped_Catedra
         //Boton de regresar
         private void btnRegresar_Click(object sender, EventArgs e)
         {
+            Login login = new Login();
+            login.Show();
             // Cerrar el formulario modal
-            this.Close();
+            this.Hide();
 
         }
 

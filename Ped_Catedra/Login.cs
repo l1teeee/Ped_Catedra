@@ -71,6 +71,7 @@ namespace Ped_Catedra
             Registro registro = new Registro();
             // Habilitar el formulario principal nuevamente
             registro.Show();
+            this.Hide();
 
         }
 
