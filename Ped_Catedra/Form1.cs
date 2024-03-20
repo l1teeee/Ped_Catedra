@@ -12,6 +12,8 @@ namespace Ped_Catedra
 {
     public partial class Memberme : Form
     {
+        Modal modalForm = new Modal();
+
         public Memberme()
         {
             InitializeComponent();
@@ -24,13 +26,14 @@ namespace Ped_Catedra
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Modal modalForm = new Modal();
             this.Opacity = 0.2;
             modalForm.ShowDialog();
             this.Opacity = 1.0;
         }
 
+        private void Memberme_Load(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

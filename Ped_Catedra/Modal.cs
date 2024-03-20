@@ -38,5 +38,10 @@ namespace Ped_Catedra
         {
 
         }
+
+        private void Modal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

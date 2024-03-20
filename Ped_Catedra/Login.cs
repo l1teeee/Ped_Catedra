@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,14 @@ namespace Ped_Catedra
 {
     public partial class Login : Form
     {
+        private Conexion mConexion;
+        Form1 modalForm = new Form1();
+
+
         public Login()
         {
             InitializeComponent();
+            mConexion = new Conexion(); 
         }
 
         //*********INICIO de estilo del login*********
@@ -71,9 +78,20 @@ namespace Ped_Catedra
             string usuario = txtUsu.Text;
             string contra = txtContra.Text;
 
+            int count = Conexion.VerificarCredenciales(usuario, contra);
 
-            
+            if (count > 0)
+            {
+                MessageBox.Show("¡Inicio de sesión exitoso!");
+            }
+            else
+            {
+                MessageBox.Show("Usuario o contraseña incorrectos");
+            }
         }
+
+
+
 
         private void Login_Load(object sender, EventArgs e)
         {

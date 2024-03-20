@@ -205,6 +205,7 @@
             this.Name = "Modal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modal";
+            this.Load += new System.EventHandler(this.Modal_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
