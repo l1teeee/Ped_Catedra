@@ -68,8 +68,18 @@ namespace Ped_Catedra
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string usuario = txtUsu.Text;
+            string user = txtUsu.Text;
             string contra = txtContra.Text;
+            if (user == "Josue" && contra == "123")
+            {
+                Memberme mainMenu = new Memberme();
+                mainMenu.Show();
+
+            }
+            else
+            {
+                MessageBox.Show("¡Usuario o Contraseña incorrecta!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             
         }
