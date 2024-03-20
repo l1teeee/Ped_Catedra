@@ -71,7 +71,13 @@ namespace Ped_Catedra
             string usuario = txtUsu.Text;
             string contra = txtContra.Text;
 
+
             
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
