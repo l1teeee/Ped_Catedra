@@ -15,7 +15,7 @@ namespace Ped_Catedra
     public partial class Login : Form
     {
         private Conexion mConexion;
-        Form1 modalForm = new Form1();
+        Memberme form1 = new Memberme();
 
 
         public Login()
@@ -75,30 +75,31 @@ namespace Ped_Catedra
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string user = txtUsu.Text;
+            string usuario = txtUsu.Text;
             string contra = txtContra.Text;
-            if (user == "Josue" && contra == "123")
-            {
-                Memberme mainMenu = new Memberme();
-                mainMenu.Show();
-
-            }
-            else
-            {
-                MessageBox.Show("¡Usuario o Contraseña incorrecta!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
 
             int count = Conexion.VerificarCredenciales(usuario, contra);
 
             if (count > 0)
             {
                 MessageBox.Show("¡Inicio de sesión exitoso!");
+
+                // Crear una instancia del formulario Form1
+
+                // Mostrar el formulario Form1
+                form1.Show();
+
+                // Opcionalmente, puedes ocultar este formulario de inicio de sesión
+                this.Hide();
             }
             else
             {
                 MessageBox.Show("Usuario o contraseña incorrectos");
             }
         }
+
+
+
 
 
 
