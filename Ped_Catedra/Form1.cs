@@ -26,7 +26,7 @@ namespace Ped_Catedra
             this.Opacity = 0.2;
             modalForm.ShowDialog();
             this.Opacity = 1.0;
-            this.Close();
+            modalForm.Enabled = true;
         }
 
     }

@@ -14,6 +14,7 @@ namespace Ped_Catedra
     {
         private Lista list;
         Memberme mainMenu;
+        DataGridView mostrarTabla;
         public Modal()
         {
             InitializeComponent();
@@ -24,7 +25,7 @@ namespace Ped_Catedra
 
         public Modal(DataGridView tabla)
         {
-            
+            mostrarTabla = tabla;
         }
 
         private void btnCloseModal_Click(object sender, EventArgs e)
@@ -50,7 +51,7 @@ namespace Ped_Catedra
             recordatorio.descripcion = txtDescri.Text;
 
             list.Insertar(recordatorio);
-            list.Mostrar(dataGridView1);
+            list.Mostrar(mostrarTabla);
         }
 
 

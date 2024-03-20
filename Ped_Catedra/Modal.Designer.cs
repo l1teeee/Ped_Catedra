@@ -39,8 +39,6 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.txtDescri = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCloseModal
@@ -184,21 +182,12 @@
             this.textBox4.TabStop = false;
             this.textBox4.Text = "DESCRIPCIÓN";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(34, 405);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(530, 150);
-            this.dataGridView1.TabIndex = 11;
-            // 
             // Modal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-            this.ClientSize = new System.Drawing.Size(612, 583);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(612, 355);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.txtDescri);
             this.Controls.Add(this.textBox2);
@@ -215,7 +204,6 @@
             this.Name = "Modal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modal";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,6 +222,5 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox txtDescri;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
