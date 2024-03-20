@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,14 @@ namespace Ped_Catedra
 {
     public partial class Login : Form
     {
+        private Conexion mConexion;
+        Memberme form1 = new Memberme();
+
+
         public Login()
         {
             InitializeComponent();
+            mConexion = new Conexion(); 
         }
 
         //*********INICIO de estilo del login*********
@@ -68,22 +75,40 @@ namespace Ped_Catedra
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string user = txtUsu.Text;
+            string usuario = txtUsu.Text;
             string contra = txtContra.Text;
-            if (user == "Josue" && contra == "123")
-            {
-                Memberme mainMenu = new Memberme();
-                mainMenu.Show();
 
+            int count = Conexion.VerificarCredenciales(usuario, contra);
+
+            if (count > 0)
+            {
+                MessageBox.Show("¡Inicio de sesión exitoso!");
+
+                // Crear una instancia del formulario Form1
+                Memberme form1 = new Memberme();
+
+                // Configurar la propiedad Usuario en el Form1
+                form1.Usuario = usuario;
+
+                // Mostrar el formulario Form1
+                form1.Show();
+
+                // Opcionalmente, puedes ocultar este formulario de inicio de sesión
+                this.Hide();
             }
             else
             {
-                MessageBox.Show("¡Usuario o Contraseña incorrecta!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Usuario o contraseña incorrectos");
             }
-
-
-            
         }
+
+
+
+
+
+
+
+
 
         private void Login_Load(object sender, EventArgs e)
         {
