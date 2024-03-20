@@ -29,7 +29,6 @@ namespace Ped_Catedra
 
             
 
-            // Cerrar el formulario modal
             this.Close();
 
             // Habilitar el formulario principal nuevamente
