@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +17,9 @@ namespace Ped_Catedra
         {
             InitializeComponent();
         }
+
+        Login login = new Login();
+
 
         public int cantidad = 1;
 
@@ -117,20 +121,12 @@ namespace Ped_Catedra
 
         private void txtDescri_Enter(object sender, EventArgs e)
         {
-            if (txtDescri.Text == "DESCRIPCIÓN")
-            {
-                txtDescri.Clear();
-                txtDescri.ForeColor = Color.LightGray;
-            }
+            
         }
 
         private void txtDescri_Leave(object sender, EventArgs e)
         {
-            if (txtDescri.Text == "")
-            {
-                txtDescri.Text = "DESCRIPCIÓN";
-                txtDescri.ForeColor = Color.DimGray;
-            }
+           
         }
 
         //*********FIN de estilo del registro*********
@@ -139,7 +135,6 @@ namespace Ped_Catedra
         //Boton de regresar
         private void btnRegresar_Click(object sender, EventArgs e)
         {
-            Login login = new Login();
             login.Show();
             // Cerrar el formulario modal
             this.Hide();
@@ -149,18 +144,46 @@ namespace Ped_Catedra
         //Boton para recibir datos
         private void btnRegistro_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtNombre.Text) || !Regex.IsMatch(txtNombre.Text, "^[A-Z][a-z]*$"))
+            {
+                MessageBox.Show("Por favor, ingrese un nombre válido (comenzando con mayúscula).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtApellido.Text) || !Regex.IsMatch(txtApellido.Text, "^[A-Z][a-z]*$"))
+            {
+                MessageBox.Show("Por favor, ingrese un apellido válido (comenzando con mayúscula).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (txtContra.Text != txtContra2.Text)
+            {
+                MessageBox.Show("Las contraseñas no coinciden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             Usuario nuevoUsu = new Usuario();
 
-            nuevoUsu.id = cantidad++;
             nuevoUsu.nombre = txtNombre.Text;
             nuevoUsu.apellido = txtApellido.Text;
             nuevoUsu.usuario = txtUsu.Text;
             nuevoUsu.contraseña = txtContra.Text;
-            nuevoUsu.descripcion = txtDescri.Text;
+
+            // Obtener la confirmación de la contraseña
+            string confirmacionContraseña = txtContra2.Text;
+
+            // Llamar al método para insertar el nuevo usuario
+            Conexion.InsertarUsuario(nuevoUsu, confirmacionContraseña);
+
+            
             MessageBox.Show("¡Registro completado con éxito!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Limpiar();
             this.Close();
+            login.Show();
+
         }
+
+
 
         public void Limpiar()
         {
@@ -169,7 +192,6 @@ namespace Ped_Catedra
             txtUsu.Clear();
             txtContra.Clear();
             txtContra2.Clear();
-            txtDescri.Clear();
         }
     }
 }

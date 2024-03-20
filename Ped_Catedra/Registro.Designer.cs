@@ -43,8 +43,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtContra2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtDescri = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.btnRegistro = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -223,31 +221,6 @@
             this.label6.TabIndex = 17;
             this.label6.Text = "_______________________________________________________";
             // 
-            // txtDescri
-            // 
-            this.txtDescri.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-            this.txtDescri.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDescri.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescri.ForeColor = System.Drawing.Color.DimGray;
-            this.txtDescri.Location = new System.Drawing.Point(418, 372);
-            this.txtDescri.Name = "txtDescri";
-            this.txtDescri.Size = new System.Drawing.Size(334, 19);
-            this.txtDescri.TabIndex = 18;
-            this.txtDescri.TabStop = false;
-            this.txtDescri.Text = "DESCRIPCIÓN";
-            this.txtDescri.Enter += new System.EventHandler(this.txtDescri_Enter);
-            this.txtDescri.Leave += new System.EventHandler(this.txtDescri_Leave);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.DimGray;
-            this.label7.Location = new System.Drawing.Point(415, 394);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(337, 13);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "_______________________________________________________";
-            // 
             // btnRegistro
             // 
             this.btnRegistro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
@@ -272,8 +245,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.ClientSize = new System.Drawing.Size(780, 515);
             this.Controls.Add(this.btnRegistro);
-            this.Controls.Add(this.txtDescri);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.txtContra2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtContra);
@@ -312,8 +283,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtContra2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtDescri;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnRegistro;
     }
 }

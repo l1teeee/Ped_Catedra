@@ -80,18 +80,17 @@ namespace Ped_Catedra
             string usuario = txtUsu.Text;
             string contra = txtContra.Text;
 
-            int count = Conexion.VerificarCredenciales(usuario, contra);
+            bool credencialesValidas = Conexion.VerificarCredenciales(usuario, contra);
 
-            if (count > 0)
+            if (credencialesValidas)
             {
-
-                // Crear una instancia del formulario Form1
+                // Crear una instancia del formulario Modal
                 Modal form1 = new Modal();
 
                 // Configurar la propiedad Usuario en el Form1
                 form1.Usuario = usuario;
 
-                // Mostrar el formulario Form1
+                // Mostrar el formulario Modal
                 form1.Show();
 
                 // Opcionalmente, puedes ocultar este formulario de inicio de sesión
@@ -102,6 +101,7 @@ namespace Ped_Catedra
                 MessageBox.Show("Usuario o contraseña incorrectos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
 
