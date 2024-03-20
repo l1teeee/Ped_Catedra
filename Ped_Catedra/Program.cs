@@ -16,7 +16,7 @@ namespace Ped_Catedra
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Modal());
+            Application.Run(new Login());
         }
     }
 }
