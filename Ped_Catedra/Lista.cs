@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,88 +26,47 @@ namespace Ped_Catedra
         }
 
 
-        public void Insertar(Recordatorio recor)
+        public void Insertar(Recordatorio recor, string usuario)
         {
-            Nodo puntero;
+            // Obtener la prioridad seleccionada desde el ComboBox
+            string textoSeleccionado = recor.prioridad;
+            int idPrioridad = int.Parse(textoSeleccionado.Split('-')[0].Trim());
 
-            Nodo auxiliar = new Nodo(recor);
-
-            if (inicio == null)
-            {
-                inicio = auxiliar;
-            }
-            else
-            {
-                puntero = inicio;
-                inicio = auxiliar;
-                auxiliar.siguiente = puntero;
-            }
-            this.totalnodos++;
+            Conexion.InsertarRecor(recor, idPrioridad, usuario);
         }
 
-        public Nodo Eliminar(int pos)
+
+        public void Eliminar(int idRecordatorio)
         {
-            if (inicio == null)
-            {
-                MessageBox.Show("La lista de recordatorios está vacía, no contiene ningún recordatorio para eliminar",
-                    "Lista de Recordatorios Vacía", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-            Nodo aux = null;
-
-            if (pos > 0 && pos <= totalnodos)
-            {
-                if (pos == 1)
-                {
-                    aux = inicio;
-                    inicio = inicio.siguiente;
-                }
-                else
-                {
-                    Nodo punteroanterior = null;
-                    Nodo punteroposterior = inicio;
-
-                    for (int i = 1; i < pos; i++)
-                    {
-                        punteroanterior = punteroposterior;
-                        punteroposterior = punteroposterior.siguiente;
-
-                    }
-                    aux = punteroposterior;
-                    punteroanterior.siguiente = punteroanterior.siguiente;
-                }
-                MessageBox.Show("¡Recordatorio eliminado!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.totalnodos--;
-                return aux;
-            }
-            return null;
+            Conexion.EliminarRecor(idRecordatorio);
         }
 
-        public void Mostrar(DataGridView tabla)
+
+        public void Mostrar(DataGridView tabla, string usuario)
         {
             //Limpiando filas y columnas
             tabla.Rows.Clear();
             tabla.Columns.Clear();
 
-            Nodo puntero = inicio;
-            //Creando columnas
-            tabla.Columns.Add("N°", "N°");
+            // Agregando las columnas al DataGridView
+            tabla.Columns.Add("ID", "ID");
             tabla.Columns.Add("Titulo", "Titulo");
-            tabla.Columns.Add("Prioridad", "Prioridad");
+            tabla.Columns.Add("PrioridadID", "Prioridad");
             tabla.Columns.Add("Fecha", "Fecha");
             tabla.Columns.Add("Hora", "Hora");
-            tabla.Columns.Add("Descripción", "Descripción");
-            int contador = 1;
+            tabla.Columns.Add("Descripcion", "Descripción");
+            tabla.Columns.Add("ObjetivosID", "ObjetivosID");
 
+            // Obtener los datos de la base de datos
+            DataTable dtRecordatorios = Conexion.ObtenerRecordatoriosPorUsuario(usuario);
 
-            //Agregando datos a las filas iterando el puntero cuando sea diferente a null
-            while (puntero != null)
+            // Agregar los datos al DataGridView
+            foreach (DataRow row in dtRecordatorios.Rows)
             {
-                tabla.Rows.Add(contador++, puntero.recordatorio.titulo, puntero.recordatorio.prioridad, puntero.recordatorio.fecha,
-                    puntero.recordatorio.hora, puntero.recordatorio.descripcion);
-                puntero = puntero.siguiente;
+                tabla.Rows.Add(row.ItemArray);
             }
         }
+
 
 
     }

@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
@@ -98,6 +99,113 @@ namespace Ped_Catedra
                 return builder.ToString();
             }
         }
+
+        public static DataTable ObtenerRecordatoriosPorUsuario(string usuario)
+        {
+            DataTable dt = new DataTable();
+
+            using (MySqlConnection conexion = ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+                    string query = "SELECT ID, Titulo, PrioridadID, Fecha, Hora, Descripcion, ObjetivosID FROM Recordatorio WHERE UsuarioID = @usuario";
+                    MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@usuario", usuario);
+
+                    using (MySqlDataReader reader = comando.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al obtener los recordatorios: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return dt;
+        }
+
+        public static void InsertarRecor(Recordatorio recor, int idPrioridad, string usuario)
+        {
+            using (MySqlConnection conexion = ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+                    string query = "INSERT INTO Recordatorio (UsuarioID, Titulo, PrioridadID, Fecha, Hora, Descripcion) " +
+                                   "VALUES (@usuario, @titulo, @prioridad, @fecha, @hora, @descripcion)";
+                    MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@usuario", usuario);
+                    comando.Parameters.AddWithValue("@titulo", recor.titulo);
+                    comando.Parameters.AddWithValue("@prioridad", idPrioridad); // Utiliza el ID de la prioridad
+                    comando.Parameters.AddWithValue("@fecha", recor.fecha);
+                    comando.Parameters.AddWithValue("@hora", recor.hora);
+                    comando.Parameters.AddWithValue("@descripcion", recor.descripcion);
+                    comando.ExecuteNonQuery();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al insertar el recordatorio: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
+        public static void EliminarRecor(int idRecordatorio)
+        {
+            using (MySqlConnection conexion = ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+                    string query = "DELETE FROM Recordatorio WHERE ID = @idRecordatorio";
+                    MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@idRecordatorio", idRecordatorio);
+                    comando.ExecuteNonQuery();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al eliminar el recordatorio: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        public static Dictionary<int, string> ObtenerPrioridades()
+        {
+            Dictionary<int, string> prioridades = new Dictionary<int, string>();
+
+            using (MySqlConnection conexion = ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+                    string query = "SELECT ID, Prioridad FROM prioridad";
+                    MySqlCommand comando = new MySqlCommand(query, conexion);
+
+                    using (MySqlDataReader reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int id = reader.GetInt32("ID");
+                            string prioridad = reader.GetString("Prioridad");
+                            prioridades.Add(id, prioridad);
+                        }
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al obtener las prioridades: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return prioridades;
+        }
+
+
+
+
 
 
 

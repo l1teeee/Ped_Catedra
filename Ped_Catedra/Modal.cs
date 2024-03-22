@@ -16,12 +16,16 @@ namespace Ped_Catedra
         private Lista list;
         Memberme mainMenu;
         public string Usuario { get; set; }
+
+
         public Modal()
         {
             InitializeComponent();
-            cmbPrioridad.SelectedIndex = 0;
             list = new Lista();
             mainMenu = new Memberme();
+            CargarPrioridades(); // Llama a la función para cargar las prioridades
+
+
         }
 
         private void btnCloseModal_Click(object sender, EventArgs e)
@@ -37,6 +41,32 @@ namespace Ped_Catedra
 
 
 
+        
+
+
+
+
+        public void Limpiar()
+        {
+            txtTitulo.Clear();
+            txtDescri.Clear();
+            cmbPrioridad.SelectedIndex = 0;
+        }
+
+        private void dgvRecordatorios_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                object valorCelda = dgvRecordatorios.Rows[e.RowIndex].Cells[0].Value;
+
+                if (valorCelda != null)
+                {
+                    txtEliminar.Text = valorCelda.ToString();
+                }
+            }
+        }
+
+
         private void btnIngresar_Click_1(object sender, EventArgs e)
         {
             // Validar el campo 'titulo'
@@ -46,11 +76,7 @@ namespace Ped_Catedra
                 return;
             }
 
-            if (!Regex.IsMatch(txtTitulo.Text, "^[A-Z][a-z]*$"))
-            {
-                MessageBox.Show("El título debe comenzar con mayúscula y contener solo letras.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            
 
             // Validar el campo 'descripcion'
             if (string.IsNullOrWhiteSpace(txtDescri.Text))
@@ -92,34 +118,14 @@ namespace Ped_Catedra
 
             recordatorio.descripcion = txtDescri.Text;
 
-            list.Insertar(recordatorio);
-            list.Mostrar(dgvRecordatorios);
+            // Aquí se llama a la función Insertar de la lista
+            list.Insertar(recordatorio, idUsu.Text);
+            list.Mostrar(dgvRecordatorios, idUsu.Text);
             MessageBox.Show("¡Recordatorio agregado!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Limpiar();
         }
 
 
-
-
-        public void Limpiar()
-        {
-            txtTitulo.Clear();
-            txtDescri.Clear();
-            cmbPrioridad.SelectedIndex = 0;
-        }
-
-        private void dgvRecordatorios_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                object valorCelda = dgvRecordatorios.Rows[e.RowIndex].Cells[0].Value;
-
-                if (valorCelda != null)
-                {
-                    txtEliminar.Text = valorCelda.ToString();
-                }
-            }
-        }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -136,7 +142,7 @@ namespace Ped_Catedra
             {
                 // Eliminar el registro solo si el campo txtEliminar no está vacío
                 list.Eliminar(int.Parse(txtEliminar.Text));
-                list.Mostrar(dgvRecordatorios);
+                list.Mostrar(dgvRecordatorios, idUsu.Text);
             }
 
             txtEliminar.Clear();
@@ -162,5 +168,73 @@ namespace Ped_Catedra
         {
             
         }
+
+        private void dgvRecordatorios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Modal_Load(object sender, EventArgs e)
+        {
+            idUsu.Text = Usuario;
+            list.Mostrar(dgvRecordatorios, idUsu.Text);
+
+        }
+
+        private void cmbPrioridad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /*
+            // Guardar el ítem seleccionado antes de limpiar el ComboBox
+            string itemSeleccionado = cmbPrioridad.SelectedItem != null ? cmbPrioridad.SelectedItem.ToString() : null;
+
+            // Limpiar los ítems actuales del ComboBox
+            cmbPrioridad.Items.Clear();
+
+            // Obtener las prioridades disponibles desde la base de datos
+            Dictionary<int, string> prioridades = Conexion.ObtenerPrioridades();
+
+            // Agregar las prioridades como ítems al ComboBox
+            foreach (KeyValuePair<int, string> prioridad in prioridades)
+            {
+                // Concatenar el ID y la prioridad con el formato deseado
+                string item = $"{prioridad.Key} - {prioridad.Value}";
+
+                // Agregar el ítem al ComboBox
+                cmbPrioridad.Items.Add(item);
+            }
+
+            // Restablecer el ítem seleccionado si estaba seleccionado antes de limpiar
+            if (itemSeleccionado != null && cmbPrioridad.Items.Contains(itemSeleccionado))
+            {
+                cmbPrioridad.SelectedItem = itemSeleccionado;
+            }*/
+        }
+
+        private void CargarPrioridades()
+        {
+            Dictionary<int, string> prioridades = Conexion.ObtenerPrioridades();
+            cmbPrioridad.Items.Clear();
+
+            // Agregar las prioridades como ítems al ComboBox
+            foreach (KeyValuePair<int, string> prioridad in prioridades)
+            {
+                // Concatenar el ID y la prioridad con el formato deseado
+                string item = $"{prioridad.Key} - {prioridad.Value}";
+
+                // Agregar el ítem al ComboBox
+                cmbPrioridad.Items.Add(item);
+            }
+
+            // Establecer el índice seleccionado si hay elementos en el ComboBox
+            if (cmbPrioridad.Items.Count > 0)
+            {
+                cmbPrioridad.SelectedIndex = 0; // Establece el primer elemento como seleccionado
+            }
+        }
+
+
+
+
+
     }
 }

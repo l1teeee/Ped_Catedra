@@ -20,7 +20,7 @@ namespace Ped_Catedra
         {
             InitializeComponent();
             list = new Lista();
-            list.Mostrar(dgvRecordatorio);
+            //list.Mostrar(dgvRecordatorio);
         }
 
         private void button2_Click(object sender, EventArgs e)
