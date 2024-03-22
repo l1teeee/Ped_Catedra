@@ -119,27 +119,25 @@ namespace Ped_Catedra
             }
         }
 
-        private void txtCorreo_Enter(object sender, EventArgs e)
+        private void txtCorreo_Enter_1(object sender, EventArgs e)
         {
-            if (txtContra2.Text == "CORREO DE USUARIO")
+            if (txtCorreo.Text == "CORREO DE USUARIO")
             {
-                txtContra2.Clear();
-                txtContra2.ForeColor = Color.LightGray;
-                txtContra2.UseSystemPasswordChar = true;
+                txtCorreo.Clear();
+                txtCorreo.ForeColor = Color.LightGray;
             }
         }
 
-        private void txtCorreo_Leave(object sender, EventArgs e)
+        private void txtCorreo_Leave_1(object sender, EventArgs e)
         {
-            if (txtContra2.Text == "")
+            if (txtCorreo.Text == "")
             {
-                txtContra2.Text = "CORREO DE USUARIO";
-                txtContra2.ForeColor = Color.DimGray;
-                txtContra2.UseSystemPasswordChar = false;
+                txtCorreo.Text = "CORREO DE USUARIO";
+                txtCorreo.ForeColor = Color.DimGray;
             }
         }
 
-        
+
 
         private void txtDescri_Enter(object sender, EventArgs e)
         {
@@ -228,6 +226,9 @@ namespace Ped_Catedra
             txtUsu.Clear();
             txtContra.Clear();
             txtContra2.Clear();
+            txtCorreo.Clear();
         }
+
+        
     }
 }

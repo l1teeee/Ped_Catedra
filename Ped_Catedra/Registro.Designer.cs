@@ -252,6 +252,8 @@
             this.txtCorreo.TabIndex = 21;
             this.txtCorreo.TabStop = false;
             this.txtCorreo.Text = "CORREO DE USUARIO";
+            this.txtCorreo.Enter += new System.EventHandler(this.txtCorreo_Enter_1);
+            this.txtCorreo.Leave += new System.EventHandler(this.txtCorreo_Leave_1);
             // 
             // label7
             // 
