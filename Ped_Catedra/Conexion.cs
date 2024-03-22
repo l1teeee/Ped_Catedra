@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,7 @@ namespace Ped_Catedra
 {
     internal class Conexion
     {
+
         private static string servidor = "localhost";
         private static string baseDatos = "memberme";
         private static string usuario = "root";
@@ -149,6 +152,28 @@ namespace Ped_Catedra
                 {
                     MessageBox.Show("Error al insertar el recordatorio: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+
+        //CORREO PRUEBA
+        public static void EnviarCorreo(string remitente, string contraseña, string destinatario, string asunto, string mensaje)
+        {
+            try
+            {
+                SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");
+                clienteSmtp.Port = 587;
+                clienteSmtp.EnableSsl = true;
+                clienteSmtp.UseDefaultCredentials = false;
+                clienteSmtp.Credentials = new NetworkCredential(remitente, contraseña);
+
+                MailMessage correo = new MailMessage(remitente, destinatario, asunto, mensaje);
+
+                clienteSmtp.Send(correo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al enviar correo electrónico: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

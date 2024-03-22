@@ -122,6 +122,14 @@ namespace Ped_Catedra
             list.Insertar(recordatorio, idUsu.Text);
             list.Mostrar(dgvRecordatorios, idUsu.Text);
             MessageBox.Show("¡Recordatorio agregado!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            
+            /*PRUEBA*/
+            Conexion.EnviarCorreo("estudiante20090231@cdb.edu.sv", "DCQgFebV", "official.count.alejandro@gmail.com", "Nuevo Recordatorio", $"Se ha agregado un nuevo recordatorio:\n\nTítulo: {recordatorio.titulo}\nFecha: {recordatorio.fecha}\nHora: {recordatorio.hora}\nDescripción: {recordatorio.descripcion}");
+
+
+
+
             Limpiar();
         }
 
