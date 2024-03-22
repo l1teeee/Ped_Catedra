@@ -119,6 +119,28 @@ namespace Ped_Catedra
             }
         }
 
+        private void txtCorreo_Enter(object sender, EventArgs e)
+        {
+            if (txtContra2.Text == "CORREO DE USUARIO")
+            {
+                txtContra2.Clear();
+                txtContra2.ForeColor = Color.LightGray;
+                txtContra2.UseSystemPasswordChar = true;
+            }
+        }
+
+        private void txtCorreo_Leave(object sender, EventArgs e)
+        {
+            if (txtContra2.Text == "")
+            {
+                txtContra2.Text = "CORREO DE USUARIO";
+                txtContra2.ForeColor = Color.DimGray;
+                txtContra2.UseSystemPasswordChar = false;
+            }
+        }
+
+        
+
         private void txtDescri_Enter(object sender, EventArgs e)
         {
             
@@ -156,6 +178,19 @@ namespace Ped_Catedra
                 return;
             }
 
+            string correo = txtCorreo.Text.Trim();
+
+            string patronCorreo = @"^[a-zA-Z0-9._%+-]+@gmail.com$";
+            Regex regexCorreo = new Regex(patronCorreo);
+
+            if (!regexCorreo.IsMatch(correo))
+            {
+                MessageBox.Show("Por favor, ingrese un correo válido de Gmail.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+
+
+
             if (txtContra.Text != txtContra2.Text)
             {
                 MessageBox.Show("Las contraseñas no coinciden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -168,6 +203,7 @@ namespace Ped_Catedra
             nuevoUsu.apellido = txtApellido.Text;
             nuevoUsu.usuario = txtUsu.Text;
             nuevoUsu.contraseña = txtContra.Text;
+            nuevoUsu.correo = txtCorreo.Text;
 
             // Obtener la confirmación de la contraseña
             string confirmacionContraseña = txtContra2.Text;

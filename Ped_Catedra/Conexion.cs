@@ -74,11 +74,12 @@ namespace Ped_Catedra
                 try
                 {
                     conexion.Open();
-                    string query = "INSERT INTO Usuario (ID, Nombres, Apellidos, Contraseña) VALUES (@usuario, @nombres, @apellidos, @contraseña)";
+                    string query = "INSERT INTO Usuario (ID, Nombres, Apellidos, Correo,Contraseña) VALUES (@usuario, @nombres, @apellidos, @correo,@contraseña)";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@usuario", nuevoUsuario.usuario);
                     comando.Parameters.AddWithValue("@nombres", nuevoUsuario.nombre);
                     comando.Parameters.AddWithValue("@apellidos", nuevoUsuario.apellido);
+                    comando.Parameters.AddWithValue("@correo", nuevoUsuario.correo);
                     comando.Parameters.AddWithValue("@contraseña", contraseñaEncriptada);
                     comando.ExecuteNonQuery();
                 }

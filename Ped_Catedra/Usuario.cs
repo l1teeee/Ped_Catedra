@@ -14,12 +14,13 @@ namespace Ped_Catedra
         public string usuario { get; set; }
         public string contraseña { get; set; }
         public string descripcion { get; set; }
+        public string correo { get; set; }
 
         public Usuario()
         {
 
         }
-        public Usuario(int id, string nombre, string apellido, string usuario, string contraseña, string descripcion)
+        public Usuario(int id, string nombre, string apellido, string usuario, string contraseña, string descripcion, string correo)
         {
             this.id = id;
             this.nombre = nombre;
@@ -27,6 +28,7 @@ namespace Ped_Catedra
             this.usuario = usuario;
             this.contraseña = contraseña;
             this.descripcion = descripcion;
+            this.correo = correo;
         }
 
 

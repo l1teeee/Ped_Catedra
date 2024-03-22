@@ -44,6 +44,8 @@
             this.txtContra2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnRegistro = new System.Windows.Forms.Button();
+            this.txtCorreo = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -238,12 +240,37 @@
             this.btnRegistro.UseVisualStyleBackColor = false;
             this.btnRegistro.Click += new System.EventHandler(this.btnRegistro_Click);
             // 
+            // txtCorreo
+            // 
+            this.txtCorreo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+            this.txtCorreo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtCorreo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCorreo.ForeColor = System.Drawing.Color.DimGray;
+            this.txtCorreo.Location = new System.Drawing.Point(418, 372);
+            this.txtCorreo.Name = "txtCorreo";
+            this.txtCorreo.Size = new System.Drawing.Size(334, 19);
+            this.txtCorreo.TabIndex = 21;
+            this.txtCorreo.TabStop = false;
+            this.txtCorreo.Text = "CORREO DE USUARIO";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.DimGray;
+            this.label7.Location = new System.Drawing.Point(415, 394);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(337, 13);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "_______________________________________________________";
+            // 
             // Registro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.ClientSize = new System.Drawing.Size(780, 515);
+            this.Controls.Add(this.txtCorreo);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.btnRegistro);
             this.Controls.Add(this.txtContra2);
             this.Controls.Add(this.label6);
@@ -284,5 +311,7 @@
         private System.Windows.Forms.TextBox txtContra2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnRegistro;
+        private System.Windows.Forms.TextBox txtCorreo;
+        private System.Windows.Forms.Label label7;
     }
 }
