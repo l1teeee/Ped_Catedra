@@ -122,10 +122,16 @@ namespace Ped_Catedra
             list.Insertar(recordatorio, idUsu.Text);
             list.Mostrar(dgvRecordatorios, idUsu.Text);
             MessageBox.Show("¡Recordatorio agregado!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
-            
+
+            if (string.IsNullOrWhiteSpace(CorreoUsu.Text))
+            {
+                MessageBox.Show("No se pudo obtener el correo del usuario destinatario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
             /*PRUEBA*/
-            Conexion.EnviarCorreo("estudiante20090231@cdb.edu.sv", "DCQgFebV", "official.count.alejandro@gmail.com", "Nuevo Recordatorio", $"Se ha agregado un nuevo recordatorio:\n\nTítulo: {recordatorio.titulo}\nFecha: {recordatorio.fecha}\nHora: {recordatorio.hora}\nDescripción: {recordatorio.descripcion}");
+            Conexion.EnviarCorreo("qukrhapiaxidtdfj", CorreoUsu.Text, "Nuevo Recordatorio", $"Se ha agregado un nuevo recordatorio:\n\nTítulo: {recordatorio.titulo}\nFecha: {recordatorio.fecha}\nHora: {recordatorio.hora}\nDescripción: {recordatorio.descripcion}");
 
 
 
@@ -185,7 +191,12 @@ namespace Ped_Catedra
         private void Modal_Load(object sender, EventArgs e)
         {
             idUsu.Text = Usuario;
+
+            string correoUsuario = Conexion.CorreoUsu(idUsu.Text);
+            CorreoUsu.Text = correoUsuario;
+
             list.Mostrar(dgvRecordatorios, idUsu.Text);
+
 
         }
 

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Modal));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtTitulo = new System.Windows.Forms.TextBox();
             this.date = new System.Windows.Forms.DateTimePicker();
             this.time = new System.Windows.Forms.DateTimePicker();
@@ -48,6 +48,7 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.idUsu = new System.Windows.Forms.Label();
+            this.CorreoUsu = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecordatorios)).BeginInit();
@@ -205,21 +206,21 @@
             // 
             // dgvRecordatorios
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            this.dgvRecordatorios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            this.dgvRecordatorios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvRecordatorios.BackgroundColor = System.Drawing.Color.White;
             this.dgvRecordatorios.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvRecordatorios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRecordatorios.GridColor = System.Drawing.Color.Black;
             this.dgvRecordatorios.Location = new System.Drawing.Point(23, 366);
             this.dgvRecordatorios.Name = "dgvRecordatorios";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            this.dgvRecordatorios.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            this.dgvRecordatorios.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvRecordatorios.Size = new System.Drawing.Size(881, 186);
             this.dgvRecordatorios.TabIndex = 21;
             this.dgvRecordatorios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecordatorios_CellClick);
@@ -274,12 +275,22 @@
             // idUsu
             // 
             this.idUsu.AutoSize = true;
-            this.idUsu.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.idUsu.ForeColor = System.Drawing.SystemColors.Control;
             this.idUsu.Location = new System.Drawing.Point(172, 292);
             this.idUsu.Name = "idUsu";
             this.idUsu.Size = new System.Drawing.Size(35, 13);
             this.idUsu.TabIndex = 25;
             this.idUsu.Text = "label1";
+            // 
+            // CorreoUsu
+            // 
+            this.CorreoUsu.AutoSize = true;
+            this.CorreoUsu.ForeColor = System.Drawing.SystemColors.Control;
+            this.CorreoUsu.Location = new System.Drawing.Point(213, 292);
+            this.CorreoUsu.Name = "CorreoUsu";
+            this.CorreoUsu.Size = new System.Drawing.Size(35, 13);
+            this.CorreoUsu.TabIndex = 26;
+            this.CorreoUsu.Text = "label1";
             // 
             // Modal
             // 
@@ -287,6 +298,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(932, 588);
+            this.Controls.Add(this.CorreoUsu);
             this.Controls.Add(this.idUsu);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnEliminar);
@@ -334,5 +346,6 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label idUsu;
+        private System.Windows.Forms.Label CorreoUsu;
     }
 }

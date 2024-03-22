@@ -130,6 +130,8 @@ namespace Ped_Catedra
             return dt;
         }
 
+
+
         public static void InsertarRecor(Recordatorio recor, int idPrioridad, string usuario)
         {
             using (MySqlConnection conexion = ObtenerConexion())
@@ -156,8 +158,35 @@ namespace Ped_Catedra
         }
 
 
+        public static string CorreoUsu(string idUsuario)
+        {
+            string correo = "";
+
+            using (MySqlConnection conexion = ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+                    string query = "SELECT Correo FROM usuario WHERE ID = @idUsuario";
+                    MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    object resultado = comando.ExecuteScalar();
+                    if (resultado != null)
+                    {
+                        correo = resultado.ToString();
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al obtener el correo del usuario: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return correo;
+        }
+
         //CORREO PRUEBA
-        public static void EnviarCorreo(string remitente, string contraseña, string destinatario, string asunto, string mensaje)
+        /*public static void EnviarCorreo(string remitente, string contraseña, string destinatario, string asunto, string mensaje)
         {
             try
             {
@@ -175,7 +204,29 @@ namespace Ped_Catedra
             {
                 MessageBox.Show("Error al enviar correo electrónico: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }*/
+
+        public static void EnviarCorreo(string contraseña, string destinatario, string asunto, string mensaje)
+        {
+            try
+            {
+                SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");
+                clienteSmtp.Port = 587;
+                clienteSmtp.EnableSsl = true;
+                clienteSmtp.UseDefaultCredentials = false;
+                clienteSmtp.Credentials = new NetworkCredential("cuponerarivas@gmail.com", contraseña);
+
+                MailMessage correo = new MailMessage("cuponerarivas@gmail.com", destinatario, asunto, mensaje);
+
+                clienteSmtp.Send(correo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al enviar correo electrónico: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
 
 
         public static void EliminarRecor(int idRecordatorio)
