@@ -16,6 +16,11 @@ namespace Ped_Catedra
         public Registro()
         {
             InitializeComponent();
+            txtVeri.Hide();
+            txtCodi.Hide();
+            labelcodi.Hide();
+            btnVeri.Hide();
+            label3.Hide();
         }
 
         Login login = new Login();
@@ -184,6 +189,7 @@ namespace Ped_Catedra
             if (!regexCorreo.IsMatch(correo))
             {
                 MessageBox.Show("Por favor, ingrese un correo válido de Gmail.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             
 
@@ -203,21 +209,41 @@ namespace Ped_Catedra
             nuevoUsu.contraseña = txtContra.Text;
             nuevoUsu.correo = txtCorreo.Text;
 
-            // Obtener la confirmación de la contraseña
             string confirmacionContraseña = txtContra2.Text;
 
-            // Llamar al método para insertar el nuevo usuario
-            Conexion.InsertarUsuario(nuevoUsu, confirmacionContraseña);
+            string campoDuplicado = Conexion.InsertarUsuario(nuevoUsu, confirmacionContraseña);
+            if (campoDuplicado == "")
+            {
 
-            
-            MessageBox.Show("¡Registro completado con éxito!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Limpiar();
-            this.Close();
-            login.Show();
+                txtVeri.Show();
+                txtCodi.Show();
+                labelcodi.Show();
+                btnVeri.Show();
+                label3.Show();
 
+
+
+                txtRegi.Hide();
+                label1.Hide();
+                txtNombre.Hide();
+                txtApellido.Hide();
+                label2.Hide();
+                txtUsu.Hide();
+                label4.Hide();
+                btnRegistro.Hide();
+                txtContra.Hide();
+                label5.Hide();
+                txtContra2.Hide();
+                label6.Hide();
+                txtCorreo.Hide();
+                label7.Hide();
+                label8.Hide();
+            }
         }
 
-
+        /*Limpiar();
+                this.Close();
+                login.Show();*/
 
         public void Limpiar()
         {
@@ -229,6 +255,9 @@ namespace Ped_Catedra
             txtCorreo.Clear();
         }
 
-        
+        private void btnVeri_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

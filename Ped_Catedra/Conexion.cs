@@ -58,13 +58,15 @@ namespace Ped_Catedra
         }
 
 
-        public static void InsertarUsuario(Usuario nuevoUsuario, string confirmacionContraseña)
+
+
+        public static string InsertarUsuario(Usuario nuevoUsuario, string confirmacionContraseña)
         {
             // Validar que las contraseñas sean iguales
             if (nuevoUsuario.contraseña != confirmacionContraseña)
             {
                 MessageBox.Show("Las contraseñas no coinciden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return "";
             }
 
             string contraseñaEncriptada = EncriptarContraseña(nuevoUsuario.contraseña);
@@ -74,7 +76,39 @@ namespace Ped_Catedra
                 try
                 {
                     conexion.Open();
-                    string query = "INSERT INTO Usuario (ID, Nombres, Apellidos, Correo,Contraseña) VALUES (@usuario, @nombres, @apellidos, @correo,@contraseña)";
+
+                    // Verificar si el usuario ya existe por ID o correo electrónico
+                    string queryValidacion = "SELECT COUNT(*) FROM Usuario WHERE ID = @usuario OR Correo = @correo";
+                    MySqlCommand comandoValidacion = new MySqlCommand(queryValidacion, conexion);
+                    comandoValidacion.Parameters.AddWithValue("@usuario", nuevoUsuario.usuario);
+                    comandoValidacion.Parameters.AddWithValue("@correo", nuevoUsuario.correo);
+                    int count = Convert.ToInt32(comandoValidacion.ExecuteScalar());
+
+                    if (count > 0)
+                    {
+                        // Determinar cuál campo ya está insertado
+                        string campoDuplicado = "";
+
+                        // Verificar si el usuario ya existe
+                        string queryUsuario = "SELECT COUNT(*) FROM Usuario WHERE ID = @usuario";
+                        MySqlCommand comandoUsuario = new MySqlCommand(queryUsuario, conexion);
+                        comandoUsuario.Parameters.AddWithValue("@usuario", nuevoUsuario.usuario);
+                        int countUsuario = Convert.ToInt32(comandoUsuario.ExecuteScalar());
+                        if (countUsuario > 0)
+                        {
+                            campoDuplicado = "usuario";
+                        }
+                        else
+                        {
+                            campoDuplicado = "correo";
+                        }
+
+                        MessageBox.Show($"El {campoDuplicado} ya está registrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return campoDuplicado;
+                    }
+
+                    // Si no existe, proceder con la inserción
+                    string query = "INSERT INTO Usuario (ID, Nombres, Apellidos, Correo, Contraseña) VALUES (@usuario, @nombres, @apellidos, @correo, @contraseña)";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@usuario", nuevoUsuario.usuario);
                     comando.Parameters.AddWithValue("@nombres", nuevoUsuario.nombre);
@@ -82,13 +116,18 @@ namespace Ped_Catedra
                     comando.Parameters.AddWithValue("@correo", nuevoUsuario.correo);
                     comando.Parameters.AddWithValue("@contraseña", contraseñaEncriptada);
                     comando.ExecuteNonQuery();
+                    MessageBox.Show("¡Registro completado con éxito!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return "";
                 }
                 catch (MySqlException ex)
                 {
                     MessageBox.Show("Error al insertar el usuario: " + ex.Message);
+                    return "";
                 }
             }
         }
+
+
 
         private static string EncriptarContraseña(string contraseña)
         {

@@ -32,7 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnRegresar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.txtRegi = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtApellido = new System.Windows.Forms.TextBox();
@@ -46,6 +46,12 @@
             this.btnRegistro = new System.Windows.Forms.Button();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtVeri = new System.Windows.Forms.Label();
+            this.txtCodi = new System.Windows.Forms.TextBox();
+            this.labelcodi = new System.Windows.Forms.Label();
+            this.btnVeri = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -87,16 +93,16 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // label3
+            // txtRegi
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DimGray;
-            this.label3.Location = new System.Drawing.Point(220, 115);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(318, 58);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "REGISTRARTE";
+            this.txtRegi.AutoSize = true;
+            this.txtRegi.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRegi.ForeColor = System.Drawing.Color.DimGray;
+            this.txtRegi.Location = new System.Drawing.Point(220, 115);
+            this.txtRegi.Name = "txtRegi";
+            this.txtRegi.Size = new System.Drawing.Size(318, 58);
+            this.txtRegi.TabIndex = 9;
+            this.txtRegi.Text = "REGISTRARTE";
             // 
             // txtNombre
             // 
@@ -265,12 +271,89 @@
             this.label7.TabIndex = 22;
             this.label7.Text = "_______________________________________________________";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(376, 493);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 13);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "label8";
+            // 
+            // txtVeri
+            // 
+            this.txtVeri.AutoSize = true;
+            this.txtVeri.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVeri.ForeColor = System.Drawing.Color.DimGray;
+            this.txtVeri.Location = new System.Drawing.Point(202, 115);
+            this.txtVeri.Name = "txtVeri";
+            this.txtVeri.Size = new System.Drawing.Size(362, 58);
+            this.txtVeri.TabIndex = 24;
+            this.txtVeri.Text = "VERIFICACIÓN";
+            // 
+            // txtCodi
+            // 
+            this.txtCodi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+            this.txtCodi.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtCodi.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCodi.ForeColor = System.Drawing.Color.DimGray;
+            this.txtCodi.Location = new System.Drawing.Point(230, 226);
+            this.txtCodi.Name = "txtCodi";
+            this.txtCodi.Size = new System.Drawing.Size(334, 19);
+            this.txtCodi.TabIndex = 25;
+            this.txtCodi.TabStop = false;
+            this.txtCodi.Text = "CODIGO DE VERIFICACIÓN";
+            // 
+            // labelcodi
+            // 
+            this.labelcodi.AutoSize = true;
+            this.labelcodi.ForeColor = System.Drawing.Color.DimGray;
+            this.labelcodi.Location = new System.Drawing.Point(222, 251);
+            this.labelcodi.Name = "labelcodi";
+            this.labelcodi.Size = new System.Drawing.Size(337, 13);
+            this.labelcodi.TabIndex = 26;
+            this.labelcodi.Text = "_______________________________________________________";
+            // 
+            // btnVeri
+            // 
+            this.btnVeri.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btnVeri.FlatAppearance.BorderSize = 0;
+            this.btnVeri.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(164)))));
+            this.btnVeri.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(164)))));
+            this.btnVeri.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVeri.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVeri.ForeColor = System.Drawing.Color.LightGray;
+            this.btnVeri.Location = new System.Drawing.Point(225, 285);
+            this.btnVeri.Name = "btnVeri";
+            this.btnVeri.Size = new System.Drawing.Size(334, 40);
+            this.btnVeri.TabIndex = 27;
+            this.btnVeri.Text = "Verificar Correo";
+            this.btnVeri.UseVisualStyleBackColor = false;
+            this.btnVeri.Click += new System.EventHandler(this.btnVeri_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(376, 339);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 28;
+            this.label3.Text = "label3";
+            // 
             // Registro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.ClientSize = new System.Drawing.Size(780, 515);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btnVeri);
+            this.Controls.Add(this.labelcodi);
+            this.Controls.Add(this.txtCodi);
+            this.Controls.Add(this.txtVeri);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.txtCorreo);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btnRegistro);
@@ -282,7 +365,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtRegi);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
@@ -301,7 +384,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnRegresar;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label txtRegi;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtApellido;
@@ -315,5 +398,11 @@
         private System.Windows.Forms.Button btnRegistro;
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label txtVeri;
+        private System.Windows.Forms.TextBox txtCodi;
+        private System.Windows.Forms.Label labelcodi;
+        private System.Windows.Forms.Button btnVeri;
+        private System.Windows.Forms.Label label3;
     }
 }
