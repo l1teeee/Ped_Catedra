@@ -58,6 +58,65 @@ namespace Ped_Catedra
         }
 
 
+        public static string ValidarExistenciaUsuario(string usuario)
+        {
+            using (MySqlConnection conexion = ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+
+                    // Verificar si el usuario ya existe por ID
+                    string queryUsuario = "SELECT COUNT(*) FROM Usuario WHERE ID = @usuario";
+                    MySqlCommand comandoUsuario = new MySqlCommand(queryUsuario, conexion);
+                    comandoUsuario.Parameters.AddWithValue("@usuario", usuario);
+                    int countUsuario = Convert.ToInt32(comandoUsuario.ExecuteScalar());
+                    if (countUsuario > 0)
+                    {
+                        return "usuario";
+                    }
+
+                    // Si no existe, retorna cadena vacía
+                    return "";
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al validar la existencia del usuario: " + ex.Message);
+                    return ""; // Retorna cadena vacía en caso de error
+                }
+            }
+        }
+
+        public static string ValidarExistenciaCorreo(string correo)
+        {
+            using (MySqlConnection conexion = ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+
+                    // Verificar si el correo ya existe
+                    string queryCorreo = "SELECT COUNT(*) FROM Usuario WHERE Correo = @correo";
+                    MySqlCommand comandoCorreo = new MySqlCommand(queryCorreo, conexion);
+                    comandoCorreo.Parameters.AddWithValue("@correo", correo);
+                    int countCorreo = Convert.ToInt32(comandoCorreo.ExecuteScalar());
+                    if (countCorreo > 0)
+                    {
+                        return "correo";
+                    }
+
+                    // Si no existe, retorna cadena vacía
+                    return "";
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al validar la existencia del correo: " + ex.Message);
+                    return ""; // Retorna cadena vacía en caso de error
+                }
+            }
+        }
+
+
 
 
         public static string InsertarUsuario(Usuario nuevoUsuario)
@@ -67,36 +126,6 @@ namespace Ped_Catedra
                 try
                 {
                     conexion.Open();
-
-                    // Verificar si el usuario ya existe por ID o correo electrónico
-                    string queryValidacion = "SELECT COUNT(*) FROM Usuario WHERE ID = @usuario OR Correo = @correo";
-                    MySqlCommand comandoValidacion = new MySqlCommand(queryValidacion, conexion);
-                    comandoValidacion.Parameters.AddWithValue("@usuario", nuevoUsuario.usuario);
-                    comandoValidacion.Parameters.AddWithValue("@correo", nuevoUsuario.correo);
-                    int count = Convert.ToInt32(comandoValidacion.ExecuteScalar());
-
-                    if (count > 0)
-                    {
-                        // Determinar cuál campo ya está insertado
-                        string campoDuplicado = "";
-
-                        // Verificar si el usuario ya existe
-                        string queryUsuario = "SELECT COUNT(*) FROM Usuario WHERE ID = @usuario";
-                        MySqlCommand comandoUsuario = new MySqlCommand(queryUsuario, conexion);
-                        comandoUsuario.Parameters.AddWithValue("@usuario", nuevoUsuario.usuario);
-                        int countUsuario = Convert.ToInt32(comandoUsuario.ExecuteScalar());
-                        if (countUsuario > 0)
-                        {
-                            campoDuplicado = "usuario";
-                        }
-                        else
-                        {
-                            campoDuplicado = "correo";
-                        }
-
-                        MessageBox.Show($"El {campoDuplicado} ya está registrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return campoDuplicado;
-                    }
 
                     // Si no existe, proceder con la inserción
                     string contraseñaEncriptada = EncriptarContraseña(nuevoUsuario.contraseña);
@@ -119,7 +148,8 @@ namespace Ped_Catedra
         }
 
 
-        
+
+
 
 
         public static string GenerarCodigo()

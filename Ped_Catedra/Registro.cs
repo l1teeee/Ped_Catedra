@@ -202,58 +202,72 @@ namespace Ped_Catedra
                 return;
             }
 
-            // Mostrar los elementos para la verificación y ocultar los de registro
-            txtVeri.Show();
-            txtCodi.Show();
-            labelcodi.Show();
-            btnVeri.Show();
-            label3.Show();
-            txtRegi.Hide();
-            label1.Hide();
-            txtNombre.Hide();
-            txtApellido.Hide();
-            label2.Hide();
-            txtUsu.Hide();
-            label4.Hide();
-            btnRegistro.Hide();
-            txtContra.Hide();
-            label5.Hide();
-            txtContra2.Hide();
-            label6.Hide();
-            txtCorreo.Hide();
-            label7.Hide();
-            label8.Hide();
+            // Validar la existencia del usuario y del correo
+            string campoDuplicadoUsuario = Conexion.ValidarExistenciaUsuario(txtUsu.Text);
+            string campoDuplicadoCorreo = Conexion.ValidarExistenciaCorreo(correo);
 
-            // Generar el código de verificación y enviarlo por correo
-            codigoVerificacion = Conexion.GenerarCodigo();
-            Conexion.EnviarCodigoVerificacion(correo, codigoVerificacion); // Se pasa el correo ingresado como parámetro
+            if (campoDuplicadoUsuario != "" || campoDuplicadoCorreo != "")
+            {
+                string mensajeError = "";
+                if (campoDuplicadoUsuario != "")
+                {
+                    mensajeError += $"El {campoDuplicadoUsuario} ya está registrado.\n";
+                }
+                if (campoDuplicadoCorreo != "")
+                {
+                    mensajeError += $"El {campoDuplicadoCorreo} ya está registrado.";
+                }
+
+                MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                // Mostrar los elementos para la verificación y ocultar los de registro
+                txtVeri.Show();
+                txtCodi.Show();
+                labelcodi.Show();
+                btnVeri.Show();
+                label3.Show();
+
+                txtRegi.Hide();
+                label1.Hide();
+                txtNombre.Hide();
+                txtApellido.Hide();
+                label2.Hide();
+                txtUsu.Hide();
+                label4.Hide();
+                btnRegistro.Hide();
+                txtContra.Hide();
+                txtContra2.Hide();
+                txtRegi.Hide();
+                label5.Hide();
+                txtContra2.Hide(); 
+                label6.Hide();
+                txtCorreo.Hide();
+                label7.Hide();
+                label8.Hide();
+                codigoVerificacion = Conexion.GenerarCodigo();
+                Conexion.EnviarCodigoVerificacion(correo, codigoVerificacion); // Se pasa el correo ingresado 
+
+            }
+
+
         }
 
 
 
 
-        public void Limpiar()
-        {
-            txtNombre.Clear();
-            txtApellido.Clear();
-            txtUsu.Clear();
-            txtContra.Clear();
-            txtContra2.Clear();
-            txtCorreo.Clear();
-        }
+        
 
         private void btnVeri_Click(object sender, EventArgs e)
         {
-            // Obtener el código ingresado por el usuario
             string codigoIngresado = txtCodi.Text;
 
-            // Validar el código ingresado
             if (codigoIngresado == codigoVerificacion)
             {
-                // Si el código ingresado es correcto, proceder con el registro del usuario
                 MessageBox.Show("Código de verificación correcto. ¡Registro completado con éxito!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Crear un objeto Usuario
                 Usuario nuevoUsu = new Usuario();
                 nuevoUsu.nombre = txtNombre.Text;
                 nuevoUsu.apellido = txtApellido.Text;
@@ -261,15 +275,11 @@ namespace Ped_Catedra
                 nuevoUsu.contraseña = txtContra.Text;
                 nuevoUsu.correo = txtCorreo.Text;
 
-                // Insertar el usuario en la base de datos
                 string campoDuplicado = Conexion.InsertarUsuario(nuevoUsu);
-
-                // Verificar si el usuario se insertó correctamente
                 if (campoDuplicado == "")
                 {
                     // Mostrar mensaje de éxito y limpiar formulario
                     MessageBox.Show("¡Usuario registrado con éxito!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Limpiar(); // Función para limpiar los campos del formulario
                     this.Close(); // Cerrar formulario actual
                     login.Show(); // Mostrar formulario de inicio de sesión
                 }
@@ -285,6 +295,14 @@ namespace Ped_Catedra
             }
         }
 
-
+        public void Limpiar()
+        {
+            txtNombre.Clear();
+            txtApellido.Clear();
+            txtUsu.Clear();
+            txtContra.Clear();
+            txtContra2.Clear();
+            txtCorreo.Clear();
+        }
     }
 }
