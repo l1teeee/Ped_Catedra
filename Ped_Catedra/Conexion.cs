@@ -60,17 +60,8 @@ namespace Ped_Catedra
 
 
 
-        public static string InsertarUsuario(Usuario nuevoUsuario, string confirmacionContraseña)
+        public static string InsertarUsuario(Usuario nuevoUsuario)
         {
-            // Validar que las contraseñas sean iguales
-            if (nuevoUsuario.contraseña != confirmacionContraseña)
-            {
-                MessageBox.Show("Las contraseñas no coinciden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return "";
-            }
-
-            string contraseñaEncriptada = EncriptarContraseña(nuevoUsuario.contraseña);
-
             using (MySqlConnection conexion = ObtenerConexion())
             {
                 try
@@ -108,6 +99,7 @@ namespace Ped_Catedra
                     }
 
                     // Si no existe, proceder con la inserción
+                    string contraseñaEncriptada = EncriptarContraseña(nuevoUsuario.contraseña);
                     string query = "INSERT INTO Usuario (ID, Nombres, Apellidos, Correo, Contraseña) VALUES (@usuario, @nombres, @apellidos, @correo, @contraseña)";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@usuario", nuevoUsuario.usuario);
@@ -116,16 +108,53 @@ namespace Ped_Catedra
                     comando.Parameters.AddWithValue("@correo", nuevoUsuario.correo);
                     comando.Parameters.AddWithValue("@contraseña", contraseñaEncriptada);
                     comando.ExecuteNonQuery();
-                    MessageBox.Show("¡Registro completado con éxito!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return "";
+                    return ""; // Retorna cadena vacía indicando éxito
                 }
                 catch (MySqlException ex)
                 {
                     MessageBox.Show("Error al insertar el usuario: " + ex.Message);
-                    return "";
+                    return ""; // Retorna cadena vacía en caso de error
                 }
             }
         }
+
+
+        
+
+
+        public static string GenerarCodigo()
+        {
+            Random rnd = new Random();
+            int codigo = rnd.Next(100000, 999999); // Genera un número aleatorio de 6 dígitos
+            return codigo.ToString();
+        }
+
+        // Método para enviar el código de verificación por correo electrónico
+        public static void EnviarCodigoVerificacion(string correoDestinatario, string codigo)
+        {
+            // Configuración del correo electrónico
+            string contraseñaCorreo = "qukrhapiaxidtdfj"; // Cambiar por tu contraseña de correo electrónico
+            string asuntoCorreo = "Código de Verificación";
+            string mensajeCorreo = "Su código de verificación es: " + codigo;
+
+            try
+            {
+                SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");
+                clienteSmtp.Port = 587;
+                clienteSmtp.EnableSsl = true;
+                clienteSmtp.UseDefaultCredentials = false;
+                clienteSmtp.Credentials = new NetworkCredential("cuponerarivas@gmail.com", contraseñaCorreo); // Cambiar por tu dirección de correo electrónico
+
+                MailMessage correo = new MailMessage("cuponerarivas@gmail.com", correoDestinatario, asuntoCorreo, mensajeCorreo); // Aquí se usa el parámetro correoDestinatario
+
+                clienteSmtp.Send(correo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al enviar correo electrónico: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
 
@@ -225,26 +254,7 @@ namespace Ped_Catedra
             return correo;
         }
 
-        //CORREO PRUEBA
-        /*public static void EnviarCorreo(string remitente, string contraseña, string destinatario, string asunto, string mensaje)
-        {
-            try
-            {
-                SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");
-                clienteSmtp.Port = 587;
-                clienteSmtp.EnableSsl = true;
-                clienteSmtp.UseDefaultCredentials = false;
-                clienteSmtp.Credentials = new NetworkCredential(remitente, contraseña);
-
-                MailMessage correo = new MailMessage(remitente, destinatario, asunto, mensaje);
-
-                clienteSmtp.Send(correo);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al enviar correo electrónico: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }*/
+        
 
         public static void EnviarCorreo(string contraseña, string destinatario, string asunto, string mensaje)
         {
