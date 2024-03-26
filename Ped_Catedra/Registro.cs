@@ -304,5 +304,24 @@ namespace Ped_Catedra
             txtContra2.Clear();
             txtCorreo.Clear();
         }
+
+        private void txtCodi_Enter(object sender, EventArgs e)
+        {
+            if (txtCodi.Text == "CODIGO DE VERIFICACION")
+            {
+                txtCodi.Clear();
+                txtCodi.ForeColor = Color.LightGray;
+            }
+        }
+
+        private void txtCodi_Leave(object sender, EventArgs e)
+        {
+
+            if (txtCodi.Text == "")
+            {
+                txtCodi.Text = "CODIGO DE VERIFICACION";
+                txtCodi.ForeColor = Color.LightGray;
+            }
+        }
     }
 }

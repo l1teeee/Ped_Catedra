@@ -28,6 +28,40 @@ namespace Ped_Catedra
             return conexion;
         }
 
+        public static string ObtenerIdUsuario(string correo)
+        {
+            string id = "";
+
+            string query = $"SELECT ID FROM usuario WHERE Correo = @correo";
+
+            try
+            {
+                using (MySqlConnection conexion = ObtenerConexion())
+                {
+                    conexion.Open();
+                    MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@correo", correo);
+                    object result = comando.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        id = result.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El usuario no ha sido encontrado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al conectar con la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return id;
+        }
+
+
         public static bool VerificarCredenciales(string usuario, string contraseña)
         {
             bool credencialesValidas = false;

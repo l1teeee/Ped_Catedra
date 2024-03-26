@@ -18,7 +18,6 @@ namespace Ped_Catedra
         Memberme form1 = new Memberme();
 
 
-
         public Login()
         {
             InitializeComponent();
@@ -116,5 +115,11 @@ namespace Ped_Catedra
             
         }
 
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Forget forget = new Forget(this); 
+            forget.Show();
+            this.Hide();
+        }
     }
 }

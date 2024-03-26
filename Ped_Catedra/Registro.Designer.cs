@@ -303,6 +303,8 @@
             this.txtCodi.TabIndex = 25;
             this.txtCodi.TabStop = false;
             this.txtCodi.Text = "CODIGO DE VERIFICACIÓN";
+            this.txtCodi.Enter += new System.EventHandler(this.txtCodi_Enter);
+            this.txtCodi.Leave += new System.EventHandler(this.txtCodi_Leave);
             // 
             // labelcodi
             // 
