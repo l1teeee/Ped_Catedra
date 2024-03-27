@@ -28,6 +28,8 @@ namespace Ped_Catedra
             return conexion;
         }
 
+
+        //RECORDAR CONTRASEÑA
         public static string ObtenerIdUsuario(string correo)
         {
             string id = "";
@@ -47,10 +49,7 @@ namespace Ped_Catedra
                     {
                         id = result.ToString();
                     }
-                    else
-                    {
-                        MessageBox.Show("El usuario no ha sido encontrado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    
                 }
             }
             catch (Exception ex)
@@ -61,7 +60,32 @@ namespace Ped_Catedra
             return id;
         }
 
+        //ACTUALIZAR CONTRASEÑA
+        public static void ActualizarContraseña(string idUsuario, string nuevaContraseña)
+        {
+            string contraseñaEncriptada = EncriptarContraseña(nuevaContraseña);
 
+            string query = "UPDATE usuario SET Contraseña = @nuevaContraseña WHERE ID = @idUsuario";
+
+            try
+            {
+                using (MySqlConnection conexion = ObtenerConexion())
+                {
+                    conexion.Open();
+                    MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@nuevaContraseña", contraseñaEncriptada);
+                    comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    comando.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar la contraseña: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        //LOGIN
         public static bool VerificarCredenciales(string usuario, string contraseña)
         {
             bool credencialesValidas = false;
@@ -91,7 +115,7 @@ namespace Ped_Catedra
             return credencialesValidas;
         }
 
-
+        //LOGIN
         public static string ValidarExistenciaUsuario(string usuario)
         {
             using (MySqlConnection conexion = ObtenerConexion())
@@ -121,6 +145,7 @@ namespace Ped_Catedra
             }
         }
 
+        //LOGIN
         public static string ValidarExistenciaCorreo(string correo)
         {
             using (MySqlConnection conexion = ObtenerConexion())
@@ -152,7 +177,7 @@ namespace Ped_Catedra
 
 
 
-
+        //CREAR USUARIO
         public static string InsertarUsuario(Usuario nuevoUsuario)
         {
             using (MySqlConnection conexion = ObtenerConexion())
@@ -185,19 +210,18 @@ namespace Ped_Catedra
 
 
 
-
+        //CREAR USUARIO
         public static string GenerarCodigo()
         {
             Random rnd = new Random();
-            int codigo = rnd.Next(100000, 999999); // Genera un número aleatorio de 6 dígitos
+            int codigo = rnd.Next(100000, 999999);
             return codigo.ToString();
         }
 
-        // Método para enviar el código de verificación por correo electrónico
+        //CREAR USUARIO
         public static void EnviarCodigoVerificacion(string correoDestinatario, string codigo)
         {
-            // Configuración del correo electrónico
-            string contraseñaCorreo = "qukrhapiaxidtdfj"; // Cambiar por tu contraseña de correo electrónico
+            string contraseñaCorreo = "qukrhapiaxidtdfj";
             string asuntoCorreo = "Código de Verificación";
             string mensajeCorreo = "Su código de verificación es: " + codigo;
 
@@ -207,9 +231,9 @@ namespace Ped_Catedra
                 clienteSmtp.Port = 587;
                 clienteSmtp.EnableSsl = true;
                 clienteSmtp.UseDefaultCredentials = false;
-                clienteSmtp.Credentials = new NetworkCredential("cuponerarivas@gmail.com", contraseñaCorreo); // Cambiar por tu dirección de correo electrónico
+                clienteSmtp.Credentials = new NetworkCredential("cuponerarivas@gmail.com", contraseñaCorreo); 
 
-                MailMessage correo = new MailMessage("cuponerarivas@gmail.com", correoDestinatario, asuntoCorreo, mensajeCorreo); // Aquí se usa el parámetro correoDestinatario
+                MailMessage correo = new MailMessage("cuponerarivas@gmail.com", correoDestinatario, asuntoCorreo, mensajeCorreo); 
 
                 clienteSmtp.Send(correo);
             }
@@ -220,8 +244,7 @@ namespace Ped_Catedra
         }
 
 
-
-
+        //CREAR USUARIO
         private static string EncriptarContraseña(string contraseña)
         {
             using (SHA256 sha256 = SHA256.Create())
@@ -236,6 +259,8 @@ namespace Ped_Catedra
             }
         }
 
+
+        //DASHBOARD
         public static DataTable ObtenerRecordatoriosPorUsuario(string usuario)
         {
             DataTable dt = new DataTable();
@@ -264,6 +289,7 @@ namespace Ped_Catedra
         }
 
 
+        //DASHBOARD
 
         public static void InsertarRecor(Recordatorio recor, int idPrioridad, string usuario)
         {
@@ -290,6 +316,8 @@ namespace Ped_Catedra
             }
         }
 
+
+        //DASHBOARD
 
         public static string CorreoUsu(string idUsuario)
         {
@@ -318,7 +346,8 @@ namespace Ped_Catedra
             return correo;
         }
 
-        
+
+        //DASHBOARD
 
         public static void EnviarCorreo(string contraseña, string destinatario, string asunto, string mensaje)
         {
@@ -342,6 +371,7 @@ namespace Ped_Catedra
 
 
 
+        //DASHBOARD
 
         public static void EliminarRecor(int idRecordatorio)
         {
@@ -361,6 +391,8 @@ namespace Ped_Catedra
                 }
             }
         }
+
+        //DASHBOARD
 
         public static Dictionary<int, string> ObtenerPrioridades()
         {
