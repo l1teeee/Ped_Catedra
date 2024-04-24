@@ -31,19 +31,11 @@ namespace Ped_Catedra
         private void btnCloseModal_Click(object sender, EventArgs e)
         {
 
-            
-
             this.Close();
 
             // Habilitar el formulario principal nuevamente
             mainMenu.Enabled = true;
         }
-
-
-
-        
-
-
 
 
         public void Limpiar()
@@ -76,19 +68,12 @@ namespace Ped_Catedra
                 return;
             }
 
-            
-
             // Validar el campo 'descripcion'
             if (string.IsNullOrWhiteSpace(txtDescri.Text))
             {
                 MessageBox.Show("Por favor, ingrese una descripción.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            Recordatorio recordatorio = new Recordatorio();
-
-            recordatorio.titulo = txtTitulo.Text;
-            recordatorio.fecha = date.Value.Date.ToString("yyyy-MM-dd");
 
             // Obtener la hora actual
             TimeSpan horaActual = DateTime.Now.TimeOfDay;
@@ -103,12 +88,16 @@ namespace Ped_Catedra
                 return;
             }
 
+            Recordatorio recordatorio = new Recordatorio();
+
+            recordatorio.titulo = txtTitulo.Text;
+            recordatorio.fecha = date.Value.Date.ToString("yyyy-MM-dd");
             recordatorio.hora = horaIngresada.ToString("hh\\:mm\\:ss");
 
             // Validar y establecer la prioridad
             if (cmbPrioridad.Items.Count > 0)
             {
-                recordatorio.prioridad = cmbPrioridad.Items[0].ToString();
+                recordatorio.prioridad = cmbPrioridad.SelectedItem.ToString();
             }
             else
             {
@@ -163,31 +152,6 @@ namespace Ped_Catedra
         }
 
 
-        private void txtTitulo_Enter(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void txtTitulo_Leave(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void txtEliminar_Enter(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void txtEliminar_Leave(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void dgvRecordatorios_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void Modal_Load(object sender, EventArgs e)
         {
             idUsu.Text = Usuario;
@@ -229,6 +193,7 @@ namespace Ped_Catedra
             }*/
         }
 
+        //Cargar prioridades en el combobox
         private void CargarPrioridades()
         {
             Dictionary<int, string> prioridades = Conexion.ObtenerPrioridades();

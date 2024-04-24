@@ -64,8 +64,6 @@
             this.txtTitulo.Size = new System.Drawing.Size(246, 26);
             this.txtTitulo.TabIndex = 2;
             this.txtTitulo.TabStop = false;
-            this.txtTitulo.Enter += new System.EventHandler(this.txtTitulo_Enter);
-            this.txtTitulo.Leave += new System.EventHandler(this.txtTitulo_Leave);
             // 
             // date
             // 
@@ -224,7 +222,6 @@
             this.dgvRecordatorios.Size = new System.Drawing.Size(881, 186);
             this.dgvRecordatorios.TabIndex = 21;
             this.dgvRecordatorios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecordatorios_CellClick);
-            this.dgvRecordatorios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecordatorios_CellContentClick);
             // 
             // txtEliminar
             // 
@@ -238,8 +235,6 @@
             this.txtEliminar.Size = new System.Drawing.Size(137, 19);
             this.txtEliminar.TabIndex = 22;
             this.txtEliminar.TabStop = false;
-            this.txtEliminar.Enter += new System.EventHandler(this.txtEliminar_Enter);
-            this.txtEliminar.Leave += new System.EventHandler(this.txtEliminar_Leave);
             // 
             // btnEliminar
             // 

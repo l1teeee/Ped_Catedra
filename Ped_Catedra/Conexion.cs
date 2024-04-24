@@ -270,7 +270,7 @@ namespace Ped_Catedra
                 try
                 {
                     conexion.Open();
-                    string query = "SELECT ID, Titulo, PrioridadID, Fecha, Hora, Descripcion, ObjetivosID FROM Recordatorio WHERE UsuarioID = @usuario";
+                    string query = "SELECT R.ID, R.Titulo, P.Prioridad AS Prioridad, R.Fecha, R.Hora, R.Descripcion, R.ObjetivosID FROM Recordatorio AS R INNER JOIN Prioridad AS P ON R.PrioridadID = P.ID WHERE R.UsuarioID =@usuario";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@usuario", usuario);
 
@@ -424,12 +424,6 @@ namespace Ped_Catedra
 
             return prioridades;
         }
-
-
-
-
-
-
 
 
     }

@@ -96,15 +96,6 @@ namespace Ped_Catedra
             }
         }
 
-
-
-
-
-
-
-
-
-
         private void Login_Load(object sender, EventArgs e)
         {
 
