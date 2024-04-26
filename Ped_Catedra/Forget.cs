@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ped_Catedra.Modelo;
 
 namespace Ped_Catedra
 {
@@ -14,7 +15,8 @@ namespace Ped_Catedra
     {
 
         private string codigoVerificacion; // Variable para almacenar el código de verificación generado
-
+        private UsuarioModel usuarioModel;
+        private EnviarCorreoModel correoModel;
 
         private Login login;
 
@@ -35,27 +37,8 @@ namespace Ped_Catedra
             label3.Hide();
             label4.Hide();
 
-
-        }
-
-
-
-        private void txtCorreo_Enter(object sender, EventArgs e)
-        {
-            if (txtCorreo.Text == "CORREO DE LA CUENTA")
-            {
-                txtCorreo.Clear();
-                txtCorreo.ForeColor = Color.LightGray;
-            }
-        }
-
-        private void txtCorreo_Leave(object sender, EventArgs e)
-        {
-            if (txtCorreo.Text == "")
-            {
-                txtCorreo.Text = "CORREO DE LA CUENTA";
-                txtCorreo.ForeColor = Color.DimGray;
-            }
+            usuarioModel = new UsuarioModel();
+            correoModel = new EnviarCorreoModel();
         }
 
         private void btnRegresar_Click(object sender, EventArgs e)
@@ -64,18 +47,20 @@ namespace Ped_Catedra
             this.Hide();
         }
 
+        //Botón donde se recibe el correo y se envia el código al usuario
         private void btnVeri_Click(object sender, EventArgs e)
         {
             string correo = txtCorreo.Text;
 
             // Obtener el ID del usuario
-            string id = Conexion.ObtenerIdUsuario(correo);
+            string id = usuarioModel.ObtenerIdUsuario(correo);
 
             if (!string.IsNullOrEmpty(id))
             {
-                codigoVerificacion = Conexion.GenerarCodigo();
-
-                Conexion.EnviarCodigoVerificacion(correo, codigoVerificacion);
+                codigoVerificacion = usuarioModel.GenerarCodigo();
+                string asunto = "Correo de verificación para recuperar cuenta";
+                string mensaje = "A continuación, te enviamos el código de verificación para que puedas recuperar tu cuenta: " + codigoVerificacion;
+                correoModel.EnviarCorreo(correo, asunto, mensaje);
 
                 txtID.Text = id;
                 MessageBox.Show("Se ha enviado un código de verificación al correo electrónico.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -94,24 +79,7 @@ namespace Ped_Catedra
             }
         }
 
-        private void txtVali_Enter(object sender, EventArgs e)
-        {
-            if (txtVali.Text == "CODIGO")
-            {
-                txtVali.Clear();
-                txtVali.ForeColor = Color.LightGray;
-            }
-        }
-
-        private void txtVali_Leave(object sender, EventArgs e)
-        {
-            if (txtVali.Text == "")
-            {
-                txtCorreo.Text = "CODIGO";
-                txtVali.ForeColor = Color.DimGray;
-            }
-        }
-
+        //Se valida que el código enviado al correo sea el correcto 
         private void btnCon_Click(object sender, EventArgs e)
         {
             string codigoIngresado = txtVali.Text;
@@ -131,6 +99,61 @@ namespace Ped_Catedra
                 label3.Show();
                 label4.Show();
 
+            }
+        }
+
+        //Se actualiza la contraseña 
+        private void btnCambio_Click(object sender, EventArgs e)
+        {
+            if (txtContra.Text != txtContra2.Text)
+            {
+                MessageBox.Show("Las contraseñas no coinciden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string idUsuario = txtID.Text;
+            string nuevaContraseña = txtContra.Text;
+
+            usuarioModel.ActualizarContraseña(idUsuario, nuevaContraseña);
+
+            MessageBox.Show("La contraseña ha sido actualizada correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+
+        //**********Inicio de Diseño del formulario**********
+        private void txtCorreo_Enter(object sender, EventArgs e)
+        {
+            if (txtCorreo.Text == "CORREO DE LA CUENTA")
+            {
+                txtCorreo.Clear();
+                txtCorreo.ForeColor = Color.LightGray;
+            }
+        }
+
+        private void txtCorreo_Leave(object sender, EventArgs e)
+        {
+            if (txtCorreo.Text == "")
+            {
+                txtCorreo.Text = "CORREO DE LA CUENTA";
+                txtCorreo.ForeColor = Color.DimGray;
+            }
+        }
+
+        private void txtVali_Enter(object sender, EventArgs e)
+        {
+            if (txtVali.Text == "CODIGO")
+            {
+                txtVali.Clear();
+                txtVali.ForeColor = Color.LightGray;
+            }
+        }
+
+        private void txtVali_Leave(object sender, EventArgs e)
+        {
+            if (txtVali.Text == "")
+            {
+                txtCorreo.Text = "CODIGO";
+                txtVali.ForeColor = Color.DimGray;
             }
         }
 
@@ -174,20 +197,6 @@ namespace Ped_Catedra
             }
         }
 
-        private void btnCambio_Click(object sender, EventArgs e)
-        {
-            if (txtContra.Text != txtContra2.Text)
-            {
-                MessageBox.Show("Las contraseñas no coinciden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            string idUsuario = txtID.Text;
-            string nuevaContraseña = txtContra.Text;
-
-            Conexion.ActualizarContraseña(idUsuario, nuevaContraseña);
-
-            MessageBox.Show("La contraseña ha sido actualizada correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+        //**********Fin de Diseño del formulario**********
     }
 }
