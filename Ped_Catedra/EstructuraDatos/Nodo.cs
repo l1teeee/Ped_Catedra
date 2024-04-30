@@ -9,11 +9,18 @@ namespace Ped_Catedra
     public class Nodo
     {
         public Recordatorio recordatorio;
+        public Prioridad prioridad;
         public Nodo siguiente;
 
         public Nodo(Recordatorio recordatorio)
         {
             this.recordatorio= recordatorio;
+            this.siguiente = null;
+        }
+
+        public Nodo(Prioridad priroridad)
+        {
+            this.prioridad = priroridad;
             this.siguiente = null;
         }
     }

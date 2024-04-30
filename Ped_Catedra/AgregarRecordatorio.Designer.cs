@@ -81,6 +81,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(25, 95);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 20);
@@ -91,7 +92,7 @@
             // 
             this.txtTitulo.Location = new System.Drawing.Point(29, 118);
             this.txtTitulo.Name = "txtTitulo";
-            this.txtTitulo.Size = new System.Drawing.Size(287, 26);
+            this.txtTitulo.Size = new System.Drawing.Size(357, 26);
             this.txtTitulo.TabIndex = 17;
             // 
             // label2
@@ -109,17 +110,13 @@
             // cmbPrioridad
             // 
             this.cmbPrioridad.BackColor = System.Drawing.SystemColors.Control;
+            this.cmbPrioridad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPrioridad.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbPrioridad.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.cmbPrioridad.FormattingEnabled = true;
-            this.cmbPrioridad.Items.AddRange(new object[] {
-            "1 - Altaa",
-            "2 - Media",
-            "3 - Baja ",
-            "5 - Nuevo"});
             this.cmbPrioridad.Location = new System.Drawing.Point(29, 195);
             this.cmbPrioridad.Name = "cmbPrioridad";
-            this.cmbPrioridad.Size = new System.Drawing.Size(287, 28);
+            this.cmbPrioridad.Size = new System.Drawing.Size(357, 28);
             this.cmbPrioridad.TabIndex = 18;
             // 
             // label3
@@ -144,7 +141,7 @@
             this.txtDescri.Multiline = true;
             this.txtDescri.Name = "txtDescri";
             this.txtDescri.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDescri.Size = new System.Drawing.Size(287, 80);
+            this.txtDescri.Size = new System.Drawing.Size(357, 80);
             this.txtDescri.TabIndex = 20;
             this.txtDescri.TabStop = false;
             // 
@@ -158,7 +155,7 @@
             this.time.MaxDate = new System.DateTime(2024, 12, 31, 0, 0, 0, 0);
             this.time.MinDate = new System.DateTime(2024, 3, 19, 0, 0, 0, 0);
             this.time.Name = "time";
-            this.time.Size = new System.Drawing.Size(287, 26);
+            this.time.Size = new System.Drawing.Size(357, 26);
             this.time.TabIndex = 23;
             // 
             // date
@@ -170,7 +167,7 @@
             this.date.MaxDate = new System.DateTime(2024, 12, 31, 0, 0, 0, 0);
             this.date.MinDate = new System.DateTime(2024, 3, 19, 0, 0, 0, 0);
             this.date.Name = "date";
-            this.date.Size = new System.Drawing.Size(287, 26);
+            this.date.Size = new System.Drawing.Size(357, 26);
             this.date.TabIndex = 22;
             // 
             // label5
@@ -206,9 +203,9 @@
             this.btnIngresar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIngresar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIngresar.ForeColor = System.Drawing.Color.White;
-            this.btnIngresar.Location = new System.Drawing.Point(12, 525);
+            this.btnIngresar.Location = new System.Drawing.Point(29, 525);
             this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(387, 31);
+            this.btnIngresar.Size = new System.Drawing.Size(357, 31);
             this.btnIngresar.TabIndex = 26;
             this.btnIngresar.Text = "Guardar Recordatorio";
             this.btnIngresar.UseVisualStyleBackColor = false;

@@ -39,6 +39,7 @@ namespace Ped_Catedra.Modelo
             }
         }
 
+        //Obtiene los recordatorios del usuario y los guarda en la lista
         public Lista ObtenerRecordatorios(string usuario)
         {
             Lista lista = new Lista();
@@ -48,7 +49,7 @@ namespace Ped_Catedra.Modelo
                 try
                 {
                     conexion.Open();
-                    string query = "SELECT R.ID, R.Titulo, P.Prioridad AS Prioridad, R.Fecha, R.Hora, R.Descripcion, R.ObjetivosID FROM Recordatorio AS R INNER JOIN Prioridad AS P ON R.PrioridadID = P.ID WHERE R.UsuarioID =@usuario";
+                    string query = "SELECT R.ID, R.Titulo, P.Prioridad AS Prioridad, R.Fecha, R.Hora, R.Descripcion FROM Recordatorio AS R INNER JOIN Prioridad AS P ON R.PrioridadID = P.ID WHERE R.UsuarioID =@usuario";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@usuario", usuario);
 
@@ -64,17 +65,7 @@ namespace Ped_Catedra.Modelo
                             recordatorio.fecha = ((DateTime)reader["Fecha"]).ToString("yyyy-MM-dd");
                             recordatorio.hora = reader["Hora"].ToString();
                             recordatorio.descripcion = reader["Descripcion"].ToString();
-                            if (!reader.IsDBNull(reader.GetOrdinal("ObjetivosID")))
-                            {
-                                recordatorio.objetivosId = Convert.ToInt32(reader["ObjetivosID"]);
-                            }
-                            else
-                            {
-                                recordatorio.objetivosId = 0;
-                            }
-
-                            // Insertar el objeto Recordatorio en la lista
-                            lista.Insertar(recordatorio);
+                            lista.InsertarRecordatorio(recordatorio);
                         }
                     }
 
@@ -85,6 +76,42 @@ namespace Ped_Catedra.Modelo
                 }
             }
             return lista;
+        }
+
+        //Obteniendo el recordatorio por el id
+        public Recordatorio RecordatorioId(int idRecordatorio)
+        {
+            Recordatorio recordatorio = new Recordatorio(); ;
+            using (MySqlConnection conexion = Conexion.ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+                    string query = "SELECT R.ID, R.Titulo, P.Prioridad AS Prioridad, R.Fecha, R.Hora, R.Descripcion FROM Recordatorio AS R INNER JOIN Prioridad AS P ON R.PrioridadID = P.ID WHERE R.ID =@idRecordatorio";
+                    MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@idRecordatorio", idRecordatorio);
+
+                    using (MySqlDataReader reader = comando.ExecuteReader())
+                    {
+                        //lista.LimpiarLista();
+                        while (reader.Read())
+                        {
+                            recordatorio.id = Convert.ToInt32(reader["ID"]);
+                            recordatorio.titulo = reader["Titulo"].ToString();
+                            recordatorio.prioridadName = reader["Prioridad"].ToString();
+                            recordatorio.fecha = ((DateTime)reader["Fecha"]).ToString("yyyy-MM-dd");
+                            recordatorio.hora = reader["Hora"].ToString();
+                            recordatorio.descripcion = reader["Descripcion"].ToString();
+                        }
+                    }
+
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al obtener los recordatorios: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return recordatorio;
         }
 
         //Eliminar un recordatorio

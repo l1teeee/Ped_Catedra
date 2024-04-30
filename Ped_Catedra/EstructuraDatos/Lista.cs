@@ -5,33 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ped_Catedra.Modelo;
-using System.Drawing;
-using System.Drawing.Drawing2D;
+
 
 namespace Ped_Catedra
 {
     public class Lista
     {
         public Nodo inicio;
-        int totalnodos;
+        int totalNodos;
         RecordatorioModel recordatorioModel;
+        PrioridadModel prioridadModel;
 
+        public int TotalNodos()
+        {
+            return this.totalNodos;
+        }
 
         public Lista()
         {
             recordatorioModel = new RecordatorioModel();
+            prioridadModel = new PrioridadModel();
             this.inicio = null;
-            this.totalnodos = 0;
+            this.totalNodos = 0;;
 
         }
 
-        public int TotalNodos()
-        {
-            return this.totalnodos;
-        }
-
-
-        public void Insertar(Recordatorio recor)
+        //Inserta en la lista los recordatorios
+        public void InsertarRecordatorio(Recordatorio recor)
         {
             Nodo auxiliar = new Nodo(recor);
 
@@ -48,82 +48,28 @@ namespace Ped_Catedra
                 }
                 puntero.siguiente = auxiliar;
             }
-            this.totalnodos++;
+            this.totalNodos++;
         }
 
-        public void LimpiarLista()
+        //Inserta en la lista las prioridades
+        public void InsertarPrioridades(Prioridad priori)
         {
-            while (inicio != null)
+            Nodo auxiliar = new Nodo(priori);
+
+            if (inicio == null)
             {
-                EliminarI();
+                inicio = auxiliar;
             }
-        }
-
-
-        public Nodo EliminarI()
-        {
-            Nodo aux = null;
-            if (inicio != null)
+            else
             {
-                aux = inicio;
-                inicio = inicio.siguiente;
-                this.totalnodos--;
-            }
-            return aux;
-        }
-
-
-        public void Eliminar(int idRecordatorio)
-        {
-            recordatorioModel.EliminarRecor(idRecordatorio);
-        }
-
-        public void MostrarRecordatorios(Panel panel, string usuario)
-        {
-            Graphics lienzo = panel.CreateGraphics();
-
-            lienzo.Clear(ColorTranslator.FromHtml("#FFFFFF"));
-
-            int x = 10;
-            int y = 20;
-
-            int ancho = 250;
-            int alto = 220;
-            int separacion = 300;
-            int ySeparacion = 240;
-
-            Font nodoFont = new Font("Nirmala UI", 11, FontStyle.Bold);
-
-            Lista listaRecordatorios = recordatorioModel.ObtenerRecordatorios(usuario);
-
-            // Iterar sobre los elementos de la lista y mostrarlos en la consola
-            Nodo puntero = listaRecordatorios.inicio;
-            int contador = 0;
-            while (puntero != null)
-            {
-                contador++;
-                Recordatorio recordatorio = puntero.recordatorio;
-                lienzo.FillRectangle(new SolidBrush(ColorTranslator.FromHtml("#007ACC")), x, y, ancho, alto);
-                lienzo.DrawString(
-                    "Titulo: " + recordatorio.titulo +
-                    "\n\nPrioridad: " + recordatorio.prioridadName +
-                    "\n\nFecha: " + recordatorio.fecha +
-                    "\n\nHora: " + recordatorio.hora +
-                    "\n\nDescripción: " + recordatorio.descripcion +
-                    "\n\nObjetivos: " + recordatorio.objetivosId
-                    , nodoFont, Brushes.White, x + 5, y + 5);
-                if(contador % 3 == 0)
+                Nodo puntero = inicio;
+                while (puntero.siguiente != null)
                 {
-                    y += ySeparacion;
-                    x = 10;
+                    puntero = puntero.siguiente;
                 }
-                else
-                {
-                    x += separacion;
-                }
-                puntero = puntero.siguiente;
+                puntero.siguiente = auxiliar;
             }
-            panel.Height = y + ySeparacion;
+            this.totalNodos++;
         }
     }
 }

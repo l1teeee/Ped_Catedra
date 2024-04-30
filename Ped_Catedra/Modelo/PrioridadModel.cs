@@ -10,9 +10,10 @@ namespace Ped_Catedra.Modelo
 {
     public class PrioridadModel
     {
-        public Dictionary<int, string> ObtenerPrioridades()
+        public Lista ObtenerPrioridades()
         {
-            Dictionary<int, string> prioridades = new Dictionary<int, string>();
+            Lista lista = new Lista();
+            Prioridad priori;
 
             using (MySqlConnection conexion = Conexion.ObtenerConexion())
             {
@@ -26,19 +27,23 @@ namespace Ped_Catedra.Modelo
                     {
                         while (reader.Read())
                         {
-                            int id = reader.GetInt32("ID");
-                            string prioridad = reader.GetString("Prioridad");
-                            prioridades.Add(id, prioridad);
+                            priori = new Prioridad();
+                            priori.id = reader.GetInt32("ID");
+                            priori.prioridad = reader.GetString("Prioridad");
+                            lista.InsertarPrioridades(priori);
                         }
                     }
                 }
                 catch (MySqlException ex)
                 {
+
                     MessageBox.Show("Error al obtener las prioridades: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
-            return prioridades;
+            return lista;
         }
     }
+
+
 }

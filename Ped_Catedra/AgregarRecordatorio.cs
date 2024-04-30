@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ped_Catedra.Modelo;
+using Ped_Catedra.Controlador;
 
 namespace Ped_Catedra
 {
@@ -15,21 +16,26 @@ namespace Ped_Catedra
     {
         RecordatorioModel recordatorioModel;
         Panel pnlRecordatorio;
+        ComboBox cmbRecordatorio;
         public Usuario datosUsu;
-        public Lista list;
+        PrioridadControlador ctrlPrioridades;
+        RecordatorioControlador ctrlrecordatorio;
 
         public AgregarRecordatorio()
         {
             InitializeComponent();
             recordatorioModel = new RecordatorioModel();
-            list = new Lista();
+            ctrlPrioridades = new PrioridadControlador();
+            ctrlrecordatorio = new RecordatorioControlador();
+            ctrlPrioridades.LlenarCmbPrioridades(cmbPrioridad);
             cmbPrioridad.SelectedIndex = 0;
         }
 
-        public void inicializarUsuario(Usuario usu, Panel panel)
+        public void inicializarUsuario(Usuario usu, Panel panel, ComboBox cmb)
         {
             datosUsu = usu;
             pnlRecordatorio = panel;
+            cmbRecordatorio = cmb;
         }
 
         //Guardando un nuevo recordatorio
@@ -52,8 +58,15 @@ namespace Ped_Catedra
                 {
                     MessageBox.Show("No se pudo agregar el recordatorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                list.MostrarRecordatorios(pnlRecordatorio, datosUsu.id);
-                this.Close();
+                pnlRecordatorio.Invalidate();//volver a dibujar en el panel
+                cmbRecordatorio.Items.Clear();//Limpiar el cmb de recordatorio
+                ctrlrecordatorio.LlenarCmbRecordatorios(cmbRecordatorio, datosUsu.id);//Actualizar el cmb de recordatorios
+
+
+                RecordatorioForm formulario2 = Application.OpenForms.OfType<RecordatorioForm>().FirstOrDefault(); //buscar y obtener una instancia del formulario RecordatorioForm
+                formulario2.OcultarElementos(datosUsu.id);//llamando al metodo que muestra o oculta las opciones de buscar y eliminar
+
+                this.Close();//Cerrando el formulario para agregar recordatorio
             }
         }
         
@@ -90,5 +103,6 @@ namespace Ped_Catedra
 
             return true;
         }
+
     }
 }

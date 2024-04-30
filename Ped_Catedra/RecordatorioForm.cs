@@ -7,32 +7,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ped_Catedra.Modelo;
+using Ped_Catedra.Controlador;
 
 namespace Ped_Catedra
 {
     public partial class RecordatorioForm : Form
     {
         public Usuario datosUsu;
-        public Lista list;
+        public RecordatorioControlador ctrlRecordatorio;
+        public RecordatorioModel recordatorioModel;
         public RecordatorioForm()
         {
             InitializeComponent();
-            list = new Lista();
+            ctrlRecordatorio = new RecordatorioControlador();
+            recordatorioModel = new RecordatorioModel();   
         }
 
         //Inicializa los datos del usuario incluyendo sus recordatorios
         public void inicializarUsuario(Usuario usu)
         {
-            datosUsu = usu;
-            lblNombre.Text = datosUsu.nombres + " " + datosUsu.apellidos;
-            list.MostrarRecordatorios(pnlRecordatorios, datosUsu.id);
+            datosUsu = usu; //Guarda el objeto usuario con toda su información
+            lblNombre.Text = datosUsu.nombres + " " + datosUsu.apellidos; //Muestra el nombre del usuario
+            ctrlRecordatorio.MostrarRecordatorios(pnlRecordatorios, datosUsu.id); //Muestra los recordatorios del usuario
+            ctrlRecordatorio.LlenarCmbRecordatorios(cmbRecordatorios, datosUsu.id); //Llena el cmb
+            OcultarElementos(datosUsu.id);//Oculta o muestra los elementos para buscar o eliminar
+            inicializarCmbRecordatorios(); //Inicializa al primer elemento del cmb
         }
 
         //Activa el formulario para agregar un nuevo recordatorio
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             AgregarRecordatorio agregarRecordatorio = new AgregarRecordatorio();
-            agregarRecordatorio.inicializarUsuario(datosUsu, pnlRecordatorios);
+            agregarRecordatorio.inicializarUsuario(datosUsu, pnlRecordatorios, cmbRecordatorios);
             agregarRecordatorio.Show();
             
         }
@@ -40,7 +47,60 @@ namespace Ped_Catedra
         //Permite dibujar el recordatorio
         private void pnlRecordatorios_Paint_1(object sender, PaintEventArgs e)
         {
-            list.MostrarRecordatorios(pnlRecordatorios, datosUsu.id);
+            pnlRecordatorios.Controls.Clear(); // Limpiar el panel
+            ctrlRecordatorio.MostrarRecordatorios(pnlRecordatorios, datosUsu.id);
+        }
+
+        //Cerrar sesión
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+            this.Close();
+        }
+
+        //Eliminar recordatorio
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            recordatorioModel.EliminarRecor(int.Parse(cmbRecordatorios.SelectedItem.ToString().Split('-')[0].Trim()));
+            pnlRecordatorios.Invalidate();
+            ctrlRecordatorio.LlenarCmbRecordatorios(cmbRecordatorios, datosUsu.id);
+            OcultarElementos(datosUsu.id);
+            cmbRecordatorios.SelectedIndex = -1;
+        }
+
+        //Mostrar detalles de un recordatorio
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            DetalleRecordatorio detalleRecordatorio = new DetalleRecordatorio();
+            detalleRecordatorio.LlenarCampos(int.Parse(cmbRecordatorios.SelectedItem.ToString().Split('-')[0].Trim()));
+            detalleRecordatorio.Show();
+        }
+
+        //Inicializar cmbRecordatorios
+        private void inicializarCmbRecordatorios()
+        {
+            if(ctrlRecordatorio.TotalRecordatorios(datosUsu.id) > 0)
+            {
+                cmbRecordatorios.SelectedIndex = 0;
+            }
+        }
+
+        //Oculta y muestra las opciones de eliminar y buscar
+        public void OcultarElementos(string idUsuario)
+        {
+            if (ctrlRecordatorio.TotalRecordatorios(idUsuario) == 0)
+            {
+                cmbRecordatorios.Hide();
+                btnBuscar.Hide();
+                btnEliminar.Hide();
+            }else
+            {
+                cmbRecordatorios.Show();
+                btnBuscar.Show();
+                btnEliminar.Show();
+
+            }
         }
     }
 }

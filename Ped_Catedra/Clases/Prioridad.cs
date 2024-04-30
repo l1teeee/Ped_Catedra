@@ -8,10 +8,17 @@ namespace Ped_Catedra
 {
     public class Prioridad
     {
-        private int id;
-        public string prioridad;
-        public string color;
-        string colores;
-        string prueba2; /*PRUEBA */
+        public int id { get; set; }
+        public string prioridad { get; set; }
+
+        public Prioridad()
+        {
+
+        }
+        public Prioridad(int id, string prioridad)
+        {
+            this.id = id;
+            this.prioridad = prioridad;
+        }
     }
 }
