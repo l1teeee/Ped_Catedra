@@ -114,6 +114,35 @@ namespace Ped_Catedra.Modelo
             return recordatorio;
         }
 
+        //Modificar un recordatorio
+        public bool ModificarRecor(Recordatorio recor)
+        {
+            using (MySqlConnection conexion = Conexion.ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+                    string query = "UPDATE Recordatorio SET Titulo = @titulo, PrioridadID = @prioridad, Fecha = @fecha, Hora = @hora, Descripcion = @descripcion " +
+                                   "WHERE ID = @idRecordatorio";
+                    MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@titulo", recor.titulo);
+                    comando.Parameters.AddWithValue("@prioridad", recor.prioridadId);
+                    comando.Parameters.AddWithValue("@fecha", recor.fecha);
+                    comando.Parameters.AddWithValue("@hora", recor.hora);
+                    comando.Parameters.AddWithValue("@descripcion", recor.descripcion);
+                    comando.Parameters.AddWithValue("@idRecordatorio", recor.id);
+                    comando.ExecuteNonQuery();
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al modificar el recordatorio: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
+
         //Eliminar un recordatorio
         public void EliminarRecor(int idRecordatorio)
         {

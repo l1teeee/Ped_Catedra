@@ -17,17 +17,21 @@ namespace Ped_Catedra
         RecordatorioModel recordatorioModel;
         PrioridadControlador ctrlPrioridad;
         string titulo = "";
-        public DetalleRecordatorio()
+        int idRecor = 0;
+        Panel pnlMostrar;
+        public DetalleRecordatorio(Panel pnlRecordatorios)
         {
             InitializeComponent();
             recordatorioModel = new RecordatorioModel();
             ctrlPrioridad = new PrioridadControlador();
-            
+            pnlMostrar = pnlRecordatorios;
         }
 
+        //Llena los campos del recordatorio seleccionado
         public void LlenarCampos(int idRecordatorio)
         {
             Recordatorio recordatorio = recordatorioModel.RecordatorioId(idRecordatorio);
+            idRecor = idRecordatorio;
             titulo = recordatorio.titulo;
             lblTitulo.Text = recordatorio.titulo.ToUpper();
             lblPrioridad.Text = recordatorio.prioridadName;
@@ -36,15 +40,36 @@ namespace Ped_Catedra
             lblHora.Text = recordatorio.hora;
         }
 
+        //Botón para modificar los datos en la bdd
         private void btnModificar_Click_1(object sender, EventArgs e)
         {
             if (ValidarIngreso())
             {
+                Recordatorio recordatorio = new Recordatorio();
+                recordatorio.id = idRecor;
+                recordatorio.titulo = txtTitulo.Text;
+                recordatorio.prioridadId = int.Parse(cmbPrioridad.SelectedItem.ToString().Split('-')[0].Trim());
+                recordatorio.fecha = date.Value.Date.ToString("yyyy-MM-dd");
+                recordatorio.hora = time.Value.TimeOfDay.ToString("hh\\:mm\\:ss");
+                recordatorio.descripcion = textDescriModi.Text;
 
-            }
-            pnlFormulario.Hide();
+                if (recordatorioModel.ModificarRecor(recordatorio))
+                {
+                    MessageBox.Show("¡Recordatorio modificado!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo modificar el recordatorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                LlenarCampos(idRecor);
+                pnlMostrar.Invalidate();
+                RecordatorioForm formulario2 = Application.OpenForms.OfType<RecordatorioForm>().FirstOrDefault();
+                formulario2.LlenarCmbRecordatorio();
+                pnlFormulario.Hide();
+            } 
         }
 
+        //Botón para ocultar la vista y mostrar el formulario para modificar
         private void btnEditar_Click(object sender, EventArgs e)
         {
             txtTitulo.Text = titulo;
@@ -55,29 +80,24 @@ namespace Ped_Catedra
             pnlFormulario.Show();
         }
 
+        //Valida el ingreso de los datos a modificar
         private bool ValidarIngreso()
         {
-            // Validar el campo titulo
             if (string.IsNullOrWhiteSpace(txtTitulo.Text))
             {
                 MessageBox.Show("Por favor, ingrese un título.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            // Validar el campo descripción
-            if (string.IsNullOrWhiteSpace(txtDescri.Text))
+            if (string.IsNullOrWhiteSpace(textDescriModi.Text))
             {
                 MessageBox.Show("Por favor, ingrese una descripción.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            // Obtener la hora actual
             TimeSpan horaActual = DateTime.Now.TimeOfDay;
 
-            // Obtener la hora ingresada en el control 'time'
             TimeSpan horaIngresada = time.Value.TimeOfDay;
-
-            // Validar que la hora ingresada no sea anterior a la hora actual
             if (horaIngresada < horaActual)
             {
                 MessageBox.Show("La hora ingresada no puede ser anterior a la hora actual.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -87,6 +107,7 @@ namespace Ped_Catedra
             return true;
         }
 
+        //Convierte la fecha y hora de texto a dateTime
         private void convertFecha()
         {
             string fechaTexto = lblFecha.Text;

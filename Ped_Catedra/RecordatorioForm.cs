@@ -30,7 +30,7 @@ namespace Ped_Catedra
             datosUsu = usu; //Guarda el objeto usuario con toda su información
             lblNombre.Text = datosUsu.nombres + " " + datosUsu.apellidos; //Muestra el nombre del usuario
             ctrlRecordatorio.MostrarRecordatorios(pnlRecordatorios, datosUsu.id); //Muestra los recordatorios del usuario
-            ctrlRecordatorio.LlenarCmbRecordatorios(cmbRecordatorios, datosUsu.id); //Llena el cmb
+            LlenarCmbRecordatorio();//Llena el cmb
             OcultarElementos(datosUsu.id);//Oculta o muestra los elementos para buscar o eliminar
             inicializarCmbRecordatorios(); //Inicializa al primer elemento del cmb
         }
@@ -64,15 +64,14 @@ namespace Ped_Catedra
         {
             recordatorioModel.EliminarRecor(int.Parse(cmbRecordatorios.SelectedItem.ToString().Split('-')[0].Trim()));
             pnlRecordatorios.Invalidate();
-            ctrlRecordatorio.LlenarCmbRecordatorios(cmbRecordatorios, datosUsu.id);
+            LlenarCmbRecordatorio();
             OcultarElementos(datosUsu.id);
-            cmbRecordatorios.SelectedIndex = -1;
         }
 
         //Mostrar detalles de un recordatorio
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            DetalleRecordatorio detalleRecordatorio = new DetalleRecordatorio();
+            DetalleRecordatorio detalleRecordatorio = new DetalleRecordatorio(pnlRecordatorios);
             detalleRecordatorio.LlenarCampos(int.Parse(cmbRecordatorios.SelectedItem.ToString().Split('-')[0].Trim()));
             detalleRecordatorio.Show();
         }
@@ -84,6 +83,13 @@ namespace Ped_Catedra
             {
                 cmbRecordatorios.SelectedIndex = 0;
             }
+        }
+
+        //Llena el cmbRecordatorios
+        public void LlenarCmbRecordatorio()
+        {
+            ctrlRecordatorio.LlenarCmbRecordatorios(cmbRecordatorios, datosUsu.id);
+            inicializarCmbRecordatorios();
         }
 
         //Oculta y muestra las opciones de eliminar y buscar

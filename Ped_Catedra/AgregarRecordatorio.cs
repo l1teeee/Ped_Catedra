@@ -19,14 +19,12 @@ namespace Ped_Catedra
         ComboBox cmbRecordatorio;
         public Usuario datosUsu;
         PrioridadControlador ctrlPrioridades;
-        RecordatorioControlador ctrlrecordatorio;
 
         public AgregarRecordatorio()
         {
             InitializeComponent();
             recordatorioModel = new RecordatorioModel();
             ctrlPrioridades = new PrioridadControlador();
-            ctrlrecordatorio = new RecordatorioControlador();
             ctrlPrioridades.LlenarCmbPrioridades(cmbPrioridad);
             cmbPrioridad.SelectedIndex = 0;
         }
@@ -54,16 +52,18 @@ namespace Ped_Catedra
                 if (recordatorioModel.InsertarRecor(recordatorio))
                 {
                     MessageBox.Show("¡Recordatorio agregado!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }else
+                }
+                else
                 {
                     MessageBox.Show("No se pudo agregar el recordatorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                RecordatorioForm formulario2 = Application.OpenForms.OfType<RecordatorioForm>().FirstOrDefault();
                 pnlRecordatorio.Invalidate();//volver a dibujar en el panel
                 cmbRecordatorio.Items.Clear();//Limpiar el cmb de recordatorio
-                ctrlrecordatorio.LlenarCmbRecordatorios(cmbRecordatorio, datosUsu.id);//Actualizar el cmb de recordatorios
+                formulario2.LlenarCmbRecordatorio();//Actualizar el cmb de recordatorios
 
 
-                RecordatorioForm formulario2 = Application.OpenForms.OfType<RecordatorioForm>().FirstOrDefault(); //buscar y obtener una instancia del formulario RecordatorioForm
+                 //buscar y obtener una instancia del formulario RecordatorioForm
                 formulario2.OcultarElementos(datosUsu.id);//llamando al metodo que muestra o oculta las opciones de buscar y eliminar
 
                 this.Close();//Cerrando el formulario para agregar recordatorio
@@ -74,27 +74,20 @@ namespace Ped_Catedra
         //Validación de datos
         private bool ValidarIngreso()
         {
-            // Validar el campo titulo
             if (string.IsNullOrWhiteSpace(txtTitulo.Text))
             {
                 MessageBox.Show("Por favor, ingrese un título.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            // Validar el campo descripción
             if (string.IsNullOrWhiteSpace(txtDescri.Text))
             {
                 MessageBox.Show("Por favor, ingrese una descripción.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            // Obtener la hora actual
             TimeSpan horaActual = DateTime.Now.TimeOfDay;
-
-            // Obtener la hora ingresada en el control 'time'
             TimeSpan horaIngresada = time.Value.TimeOfDay;
-
-            // Validar que la hora ingresada no sea anterior a la hora actual
             if (horaIngresada < horaActual)
             {
                 MessageBox.Show("La hora ingresada no puede ser anterior a la hora actual.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
