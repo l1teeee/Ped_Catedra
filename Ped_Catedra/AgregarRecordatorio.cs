@@ -24,9 +24,7 @@ namespace Ped_Catedra
         {
             InitializeComponent();
             recordatorioModel = new RecordatorioModel();
-            ctrlPrioridades = new PrioridadControlador();
-            ctrlPrioridades.LlenarCmbPrioridades(cmbPrioridad);
-            cmbPrioridad.SelectedIndex = 0;
+            ctrlPrioridades = new PrioridadControlador();  
         }
 
         public void inicializarUsuario(Usuario usu, Panel panel, ComboBox cmb)
@@ -34,6 +32,8 @@ namespace Ped_Catedra
             datosUsu = usu;
             pnlRecordatorio = panel;
             cmbRecordatorio = cmb;
+            ctrlPrioridades.LlenarCmbPrioridades(cmbPrioridad, datosUsu.id);
+            cmbPrioridad.SelectedIndex = 0;
         }
 
         //Guardando un nuevo recordatorio

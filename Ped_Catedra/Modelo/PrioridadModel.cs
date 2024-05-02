@@ -10,7 +10,7 @@ namespace Ped_Catedra.Modelo
 {
     public class PrioridadModel
     {
-        public Lista ObtenerPrioridades()
+        public Lista ObtenerPrioridades(string idUsuario)
         {
             Lista lista = new Lista();
             Prioridad priori;
@@ -20,8 +20,9 @@ namespace Ped_Catedra.Modelo
                 try
                 {
                     conexion.Open();
-                    string query = "SELECT ID, Prioridad FROM prioridad";
+                    string query = "SELECT * FROM prioridad WHERE IdUsuario = @usuario OR IdUsuario = 'admin'";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@usuario", idUsuario);
 
                     using (MySqlDataReader reader = comando.ExecuteReader())
                     {

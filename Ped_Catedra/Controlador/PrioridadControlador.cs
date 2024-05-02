@@ -17,9 +17,9 @@ namespace Ped_Catedra.Controlador
         }
 
         //Llena el combobox con las prioridades
-        public void LlenarCmbPrioridades(ComboBox cmb)
+        public void LlenarCmbPrioridades(ComboBox cmb, string id)
         {
-            Lista listaPrioridades = prioridadModel.ObtenerPrioridades();
+            Lista listaPrioridades = prioridadModel.ObtenerPrioridades(id);
 
             Nodo puntero = listaPrioridades.inicio;
             cmb.Items.Clear();
@@ -33,9 +33,9 @@ namespace Ped_Catedra.Controlador
 
 
         //Regresa el index dentro del cmb de una prioridad en especifico
-        public int IndexCmbPrioridades(string nombre)
+        public int IndexCmbPrioridades(string nombre, string id)
         {
-            Lista listaPrioridades = prioridadModel.ObtenerPrioridades();
+            Lista listaPrioridades = prioridadModel.ObtenerPrioridades(id);
 
             Nodo puntero = listaPrioridades.inicio;
             int index = 0;
@@ -53,9 +53,9 @@ namespace Ped_Catedra.Controlador
         }
 
         //Regresa el total de prioridades
-        public int TotalPrioridades()
+        public int TotalPrioridades(string id)
         {
-            Lista listaPrioridades = prioridadModel.ObtenerPrioridades();
+            Lista listaPrioridades = prioridadModel.ObtenerPrioridades(id);
             return listaPrioridades.TotalNodos();
         }
     }

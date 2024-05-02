@@ -18,6 +18,7 @@ namespace Ped_Catedra
         PrioridadControlador ctrlPrioridad;
         string titulo = "";
         int idRecor = 0;
+        string idUsu;
         Panel pnlMostrar;
         public DetalleRecordatorio(Panel pnlRecordatorios)
         {
@@ -38,6 +39,7 @@ namespace Ped_Catedra
             txtDescri.Text = recordatorio.descripcion;
             lblFecha.Text = recordatorio.fecha;
             lblHora.Text = recordatorio.hora;
+            idUsu = recordatorio.usuarioId;
         }
 
         //Botón para modificar los datos en la bdd
@@ -75,8 +77,8 @@ namespace Ped_Catedra
             txtTitulo.Text = titulo;
             textDescriModi.Text = txtDescri.Text;
             convertFecha();
-            ctrlPrioridad.LlenarCmbPrioridades(cmbPrioridad);
-            cmbPrioridad.SelectedIndex = ctrlPrioridad.IndexCmbPrioridades(lblPrioridad.Text);
+            ctrlPrioridad.LlenarCmbPrioridades(cmbPrioridad, idUsu);
+            cmbPrioridad.SelectedIndex = ctrlPrioridad.IndexCmbPrioridades(lblPrioridad.Text, idUsu);
             pnlFormulario.Show();
         }
 
