@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrioridadForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtTitulo = new System.Windows.Forms.TextBox();
-            this.dtgPrioridades = new System.Windows.Forms.DataGridView();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Opcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtPrioridad = new System.Windows.Forms.TextBox();
+            this.dgvPrioridades = new System.Windows.Forms.DataGridView();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgPrioridades)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPrioridades)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -84,48 +84,32 @@
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(12, 99);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 21);
+            this.label1.Size = new System.Drawing.Size(194, 21);
             this.label1.TabIndex = 17;
-            this.label1.Text = "Digite un titulo:";
+            this.label1.Text = "Nombre de la prioridad:";
             // 
-            // txtTitulo
+            // txtPrioridad
             // 
-            this.txtTitulo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitulo.Location = new System.Drawing.Point(146, 96);
-            this.txtTitulo.Name = "txtTitulo";
-            this.txtTitulo.Size = new System.Drawing.Size(195, 27);
-            this.txtTitulo.TabIndex = 18;
+            this.txtPrioridad.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrioridad.Location = new System.Drawing.Point(203, 96);
+            this.txtPrioridad.Name = "txtPrioridad";
+            this.txtPrioridad.Size = new System.Drawing.Size(195, 27);
+            this.txtPrioridad.TabIndex = 18;
+            this.txtPrioridad.TextChanged += new System.EventHandler(this.txtPrioridad_TextChanged);
             // 
-            // dtgPrioridades
+            // dgvPrioridades
             // 
-            this.dtgPrioridades.BackgroundColor = System.Drawing.Color.White;
-            this.dtgPrioridades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgPrioridades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Nombre,
-            this.Opcion});
-            this.dtgPrioridades.Location = new System.Drawing.Point(1, 205);
-            this.dtgPrioridades.Name = "dtgPrioridades";
-            this.dtgPrioridades.ReadOnly = true;
-            this.dtgPrioridades.Size = new System.Drawing.Size(495, 192);
-            this.dtgPrioridades.TabIndex = 19;
-            // 
-            // Nombre
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            this.Nombre.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Nombre.HeaderText = "Nombre de Prioridad";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 300;
-            // 
-            // Opcion
-            // 
-            this.Opcion.HeaderText = "Opciones";
-            this.Opcion.Name = "Opcion";
-            this.Opcion.ReadOnly = true;
-            this.Opcion.Width = 152;
+            this.dgvPrioridades.BackgroundColor = System.Drawing.Color.White;
+            this.dgvPrioridades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPrioridades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.Nombre});
+            this.dgvPrioridades.Location = new System.Drawing.Point(1, 205);
+            this.dgvPrioridades.Name = "dgvPrioridades";
+            this.dgvPrioridades.ReadOnly = true;
+            this.dgvPrioridades.Size = new System.Drawing.Size(495, 192);
+            this.dgvPrioridades.TabIndex = 19;
+            this.dgvPrioridades.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPrioridades_CellClick);
             // 
             // btnModificar
             // 
@@ -137,7 +121,7 @@
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.ForeColor = System.Drawing.Color.White;
-            this.btnModificar.Location = new System.Drawing.Point(143, 149);
+            this.btnModificar.Location = new System.Drawing.Point(16, 149);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(95, 34);
             this.btnModificar.TabIndex = 33;
@@ -154,7 +138,7 @@
             this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminar.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.ForeColor = System.Drawing.Color.White;
-            this.btnEliminar.Location = new System.Drawing.Point(270, 149);
+            this.btnEliminar.Location = new System.Drawing.Point(143, 149);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(95, 34);
             this.btnEliminar.TabIndex = 34;
@@ -177,6 +161,26 @@
             this.btnAgregar.TabIndex = 35;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            this.id.Width = 52;
+            // 
+            // Nombre
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            this.Nombre.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Nombre.HeaderText = "Nombre de Prioridad";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 452;
             // 
             // PrioridadForm
             // 
@@ -187,8 +191,8 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
-            this.Controls.Add(this.dtgPrioridades);
-            this.Controls.Add(this.txtTitulo);
+            this.Controls.Add(this.dgvPrioridades);
+            this.Controls.Add(this.txtPrioridad);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Name = "PrioridadForm";
@@ -196,7 +200,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgPrioridades)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPrioridades)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,12 +212,12 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtTitulo;
-        private System.Windows.Forms.DataGridView dtgPrioridades;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Opcion;
+        private System.Windows.Forms.TextBox txtPrioridad;
+        private System.Windows.Forms.DataGridView dgvPrioridades;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
     }
 }

@@ -52,6 +52,20 @@ namespace Ped_Catedra.Controlador
             return -1;
         }
 
+        public void LlenarTabla(DataGridView tabla, string usuario)
+        {
+            Lista listaPrioridades = prioridadModel.ObtenerPrioridadesUsu(usuario);
+
+            Nodo puntero = listaPrioridades.inicio;
+            tabla.Rows.Clear();
+            while (puntero != null)
+            {
+                Prioridad priori = puntero.prioridad;
+                tabla.Rows.Add(priori.id,priori.prioridad);
+                puntero = puntero.siguiente;
+            }
+        }
+
         //Regresa el total de prioridades
         public int TotalPrioridades(string id)
         {

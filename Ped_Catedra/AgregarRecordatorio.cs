@@ -48,6 +48,7 @@ namespace Ped_Catedra
                 recordatorio.hora = time.Value.TimeOfDay.ToString("hh\\:mm\\:ss");
                 recordatorio.descripcion = txtDescri.Text;
                 recordatorio.usuarioId = datosUsu.id;
+                recordatorio.estado = "Disponible";
 
                 if (recordatorioModel.InsertarRecor(recordatorio))
                 {

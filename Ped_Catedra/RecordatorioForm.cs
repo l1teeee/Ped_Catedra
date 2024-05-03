@@ -108,5 +108,11 @@ namespace Ped_Catedra
 
             }
         }
+
+        private void btnPrioridad_Click(object sender, EventArgs e)
+        {
+            PrioridadForm prioridadForm = new PrioridadForm(datosUsu);
+            prioridadForm.Show();
+        }
     }
 }

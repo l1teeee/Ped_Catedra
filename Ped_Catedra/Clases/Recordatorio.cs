@@ -19,6 +19,7 @@ namespace Ped_Catedra
         public int objetivosId { get; set; }
 
         public string usuarioId { get; set; }
+        public string estado { get; set; }
 
         public Recordatorio()
         {

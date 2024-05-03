@@ -19,8 +19,8 @@ namespace Ped_Catedra.Modelo
                 try
                 {
                     conexion.Open();
-                    string query = "INSERT INTO Recordatorio (UsuarioID, Titulo, PrioridadID, Fecha, Hora, Descripcion) " +
-                                   "VALUES (@usuario, @titulo, @prioridad, @fecha, @hora, @descripcion)";
+                    string query = "INSERT INTO Recordatorio (UsuarioID, Titulo, PrioridadID, Fecha, Hora, Descripcion, Estado) " +
+                                   "VALUES (@usuario, @titulo, @prioridad, @fecha, @hora, @descripcion, @estado)";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@usuario", recor.usuarioId);
                     comando.Parameters.AddWithValue("@titulo", recor.titulo);
@@ -28,6 +28,7 @@ namespace Ped_Catedra.Modelo
                     comando.Parameters.AddWithValue("@fecha", recor.fecha);
                     comando.Parameters.AddWithValue("@hora", recor.hora);
                     comando.Parameters.AddWithValue("@descripcion", recor.descripcion);
+                    comando.Parameters.AddWithValue("@estado", recor.estado);
                     comando.ExecuteNonQuery();
                     return true;
                 }
@@ -49,7 +50,8 @@ namespace Ped_Catedra.Modelo
                 try
                 {
                     conexion.Open();
-                    string query = "SELECT R.ID, R.Titulo, P.Prioridad AS Prioridad, R.Fecha, R.Hora, R.Descripcion FROM Recordatorio AS R INNER JOIN Prioridad AS P ON R.PrioridadID = P.ID WHERE R.UsuarioID =@usuario";
+                    string query = "SELECT R.ID, R.Titulo, P.Prioridad AS Prioridad, R.Fecha, R.Hora, R.Descripcion FROM Recordatorio AS R INNER JOIN Prioridad AS P ON R.PrioridadID = P.ID " +
+                        "WHERE R.UsuarioID =@usuario AND R.Estado = 'Disponible'";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@usuario", usuario);
 
@@ -87,7 +89,8 @@ namespace Ped_Catedra.Modelo
                 try
                 {
                     conexion.Open();
-                    string query = "SELECT R.ID, R.Titulo, P.Prioridad AS Prioridad, R.Fecha, R.Hora, R.Descripcion FROM Recordatorio AS R INNER JOIN Prioridad AS P ON R.PrioridadID = P.ID WHERE R.ID =@idRecordatorio";
+                    string query = "SELECT R.ID, R.Titulo, P.Prioridad AS Prioridad, R.Fecha, R.Hora, R.Descripcion FROM Recordatorio AS R INNER JOIN Prioridad AS P ON R.PrioridadID = P.ID " +
+                        "WHERE R.ID =@idRecordatorio AND R.Estado = 'Disponible'";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@idRecordatorio", idRecordatorio);
 

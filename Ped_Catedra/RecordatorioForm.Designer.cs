@@ -118,6 +118,7 @@
             this.btnPrioridad.TabIndex = 21;
             this.btnPrioridad.Text = "PRIORIDAD";
             this.btnPrioridad.UseVisualStyleBackColor = true;
+            this.btnPrioridad.Click += new System.EventHandler(this.btnPrioridad_Click);
             // 
             // pictureBox1
             // 
