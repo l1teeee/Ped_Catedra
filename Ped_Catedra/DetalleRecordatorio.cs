@@ -26,6 +26,9 @@ namespace Ped_Catedra
             recordatorioModel = new RecordatorioModel();
             ctrlPrioridad = new PrioridadControlador();
             pnlMostrar = pnlRecordatorios;
+            time.Format = DateTimePickerFormat.Time;
+            time.ShowUpDown = true;
+            date.MinDate = DateTime.Today;
         }
 
         //Llena los campos del recordatorio seleccionado
@@ -98,9 +101,14 @@ namespace Ped_Catedra
             }
 
             TimeSpan horaActual = DateTime.Now.TimeOfDay;
-
             TimeSpan horaIngresada = time.Value.TimeOfDay;
-            if (horaIngresada < horaActual)
+
+            DateTime fechaIngresada = date.Value;
+            DateTime fechaActual = DateTime.Today;
+
+
+
+            if (fechaIngresada < fechaActual || (fechaIngresada == fechaActual && horaIngresada < horaActual))
             {
                 MessageBox.Show("La hora ingresada no puede ser anterior a la hora actual.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

@@ -99,6 +99,11 @@ namespace Ped_Catedra
                 label3.Show();
                 label4.Show();
 
+
+
+            } else
+            {
+                MessageBox.Show("El codigo es incorrecto, verificar informacion", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

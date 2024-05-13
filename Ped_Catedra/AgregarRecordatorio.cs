@@ -20,11 +20,15 @@ namespace Ped_Catedra
         public Usuario datosUsu;
         PrioridadControlador ctrlPrioridades;
 
+
         public AgregarRecordatorio()
         {
             InitializeComponent();
             recordatorioModel = new RecordatorioModel();
-            ctrlPrioridades = new PrioridadControlador();  
+            ctrlPrioridades = new PrioridadControlador();
+            time.Format = DateTimePickerFormat.Time;
+            time.ShowUpDown = true;
+            date.MinDate = DateTime.Today;
         }
 
         public void inicializarUsuario(Usuario usu, Panel panel, ComboBox cmb)
@@ -89,7 +93,13 @@ namespace Ped_Catedra
 
             TimeSpan horaActual = DateTime.Now.TimeOfDay;
             TimeSpan horaIngresada = time.Value.TimeOfDay;
-            if (horaIngresada < horaActual)
+
+            DateTime fechaIngresada = date.Value;
+            DateTime fechaActual = DateTime.Today;
+
+
+
+            if (fechaIngresada < fechaActual || (fechaIngresada == fechaActual && horaIngresada < horaActual))
             {
                 MessageBox.Show("La hora ingresada no puede ser anterior a la hora actual.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
