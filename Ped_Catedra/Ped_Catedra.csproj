@@ -111,6 +111,7 @@
       <DependentUpon>AgregarRecordatorio.cs</DependentUpon>
     </Compile>
     <Compile Include="Clases\Objetivos.cs" />
+    <Compile Include="Controlador\ObjetivoControlador.cs" />
     <Compile Include="Controlador\PrioridadControlador.cs" />
     <Compile Include="Controlador\RecordatorioControlador.cs" />
     <Compile Include="DetalleRecordatorio.cs">
@@ -134,6 +135,7 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\EnviarCorreoModel.cs" />
+    <Compile Include="Modelo\ObjetivoModel.cs" />
     <Compile Include="Modelo\PrioridadModel.cs" />
     <Compile Include="Modelo\RecordatorioModel.cs" />
     <Compile Include="Modelo\UsuarioModel.cs" />

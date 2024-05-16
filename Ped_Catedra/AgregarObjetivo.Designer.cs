@@ -70,9 +70,9 @@
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(89, 19);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(318, 32);
+            this.label4.Size = new System.Drawing.Size(247, 32);
             this.label4.TabIndex = 20;
-            this.label4.Text = "AGREGAR RECORDATORIO";
+            this.label4.Text = "AGREGAR OBJETIVO";
             // 
             // label1
             // 

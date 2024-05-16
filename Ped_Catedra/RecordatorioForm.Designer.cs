@@ -102,6 +102,7 @@
             this.btnObjetivos.TabIndex = 22;
             this.btnObjetivos.Text = "OBJETIVOS";
             this.btnObjetivos.UseVisualStyleBackColor = true;
+            this.btnObjetivos.Click += new System.EventHandler(this.btnObjetivos_Click);
             // 
             // btnPrioridad
             // 

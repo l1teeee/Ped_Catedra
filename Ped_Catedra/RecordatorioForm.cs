@@ -114,5 +114,11 @@ namespace Ped_Catedra
             PrioridadForm prioridadForm = new PrioridadForm(datosUsu);
             prioridadForm.Show();
         }
+
+        private void btnObjetivos_Click(object sender, EventArgs e)
+        {
+            AgregarObjetivo objetivoForm = new AgregarObjetivo(datosUsu);
+            objetivoForm.Show();
+        }
     }
 }

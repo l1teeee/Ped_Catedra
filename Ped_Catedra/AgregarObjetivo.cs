@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ped_Catedra.Controlador;
+using Ped_Catedra.Modelo;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,15 @@ namespace Ped_Catedra
 {
     public partial class AgregarObjetivo : Form
     {
-        public AgregarObjetivo()
+        ObjetivoControlador objetivoControlador;
+        ObjetivoModel objModel;
+        Usuario User;
+
+        public AgregarObjetivo(Usuario user)
         {
             InitializeComponent();
+            User = user;
+            objetivoControlador.LlenarCmbRecordatorios(cmbRecordatorios, User.id);
         }
     }
 }
