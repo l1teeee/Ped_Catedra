@@ -37,7 +37,6 @@
             this.lblFecha = new System.Windows.Forms.Label();
             this.lblPrioridad = new System.Windows.Forms.Label();
             this.txtDescri = new System.Windows.Forms.TextBox();
-            this.txtObjetivos = new System.Windows.Forms.TextBox();
             this.btnEditar = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.TextBox();
             this.pnlFormulario = new System.Windows.Forms.Panel();
@@ -52,7 +51,9 @@
             this.cmbPrioridad = new System.Windows.Forms.ComboBox();
             this.txtTitulo = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.pnlFormulario.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -158,20 +159,6 @@
             this.txtDescri.TabIndex = 21;
             this.txtDescri.TabStop = false;
             // 
-            // txtObjetivos
-            // 
-            this.txtObjetivos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.txtObjetivos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtObjetivos.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtObjetivos.ForeColor = System.Drawing.Color.White;
-            this.txtObjetivos.Location = new System.Drawing.Point(12, 371);
-            this.txtObjetivos.Multiline = true;
-            this.txtObjetivos.Name = "txtObjetivos";
-            this.txtObjetivos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtObjetivos.Size = new System.Drawing.Size(369, 80);
-            this.txtObjetivos.TabIndex = 22;
-            this.txtObjetivos.TabStop = false;
-            // 
             // btnEditar
             // 
             this.btnEditar.BackColor = System.Drawing.SystemColors.Control;
@@ -216,7 +203,7 @@
             this.pnlFormulario.Controls.Add(this.cmbPrioridad);
             this.pnlFormulario.Controls.Add(this.txtTitulo);
             this.pnlFormulario.Controls.Add(this.label10);
-            this.pnlFormulario.Location = new System.Drawing.Point(12, 10);
+            this.pnlFormulario.Location = new System.Drawing.Point(396, 12);
             this.pnlFormulario.Name = "pnlFormulario";
             this.pnlFormulario.Size = new System.Drawing.Size(369, 498);
             this.pnlFormulario.TabIndex = 26;
@@ -355,16 +342,28 @@
             this.label10.TabIndex = 27;
             this.label10.Text = "Digite un titulo:";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(12, 371);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(364, 77);
+            this.dataGridView1.TabIndex = 27;
+            // 
             // DetalleRecordatorio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.ClientSize = new System.Drawing.Size(393, 520);
+            this.ClientSize = new System.Drawing.Size(736, 520);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pnlFormulario);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.btnEditar);
-            this.Controls.Add(this.txtObjetivos);
             this.Controls.Add(this.txtDescri);
             this.Controls.Add(this.lblHora);
             this.Controls.Add(this.lblFecha);
@@ -379,6 +378,7 @@
             this.Text = "Detalle Recordatorio";
             this.pnlFormulario.ResumeLayout(false);
             this.pnlFormulario.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -394,7 +394,6 @@
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Label lblPrioridad;
         private System.Windows.Forms.TextBox txtDescri;
-        private System.Windows.Forms.TextBox txtObjetivos;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.TextBox lblTitulo;
         private System.Windows.Forms.Panel pnlFormulario;
@@ -409,5 +408,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

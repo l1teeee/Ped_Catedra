@@ -112,6 +112,7 @@
             // 
             // cmbRecordatorios
             // 
+            this.cmbRecordatorios.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRecordatorios.FormattingEnabled = true;
             this.cmbRecordatorios.Location = new System.Drawing.Point(38, 353);
             this.cmbRecordatorios.Name = "cmbRecordatorios";
@@ -143,6 +144,7 @@
             this.btnIngresarObjetivo.TabIndex = 27;
             this.btnIngresarObjetivo.Text = "Guardar Objetivo";
             this.btnIngresarObjetivo.UseVisualStyleBackColor = false;
+            this.btnIngresarObjetivo.Click += new System.EventHandler(this.btnIngresarObjetivo_Click);
             // 
             // AgregarObjetivo
             // 

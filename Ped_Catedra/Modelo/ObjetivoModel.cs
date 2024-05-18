@@ -12,7 +12,7 @@ namespace Ped_Catedra.Modelo
 {
     public class ObjetivoModel
     {
-        public bool InsertarModelo(Objetivos obj)
+        public bool InsertarObj(Objetivos obj)
         {
             using (MySqlConnection conexion = Conexion.ObtenerConexion())
             {
@@ -118,6 +118,39 @@ namespace Ped_Catedra.Modelo
                     
                 }
             }
+        }
+
+        public Lista obtenerObjetviosRecord(string idRecord)
+        {
+            Lista list = new Lista();
+            Objetivos obj;
+
+            using(MySqlConnection conexion = Conexion.ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+                    string qr = "SELECT * FROM objetivos WHERE idRecordatorio = @id";
+                    MySqlCommand comando = new MySqlCommand(qr, conexion);
+                    comando.Parameters.AddWithValue("@id", idRecord);
+
+                    using (MySqlDataReader reader = comando.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            obj = new Objetivos();
+                            obj.id = reader.GetInt32("ID");
+                            obj.descrip = reader.GetString("Descripcion");
+                            list.InsertarObjetivos(obj);
+                        }
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al obtener los objetivos" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return list;
         }
     }
 }

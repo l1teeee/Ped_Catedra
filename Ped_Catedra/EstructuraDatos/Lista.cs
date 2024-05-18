@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ped_Catedra.Clases;
 using Ped_Catedra.Modelo;
 
 
@@ -68,6 +69,25 @@ namespace Ped_Catedra
                     puntero = puntero.siguiente;
                 }
                 puntero.siguiente = auxiliar;
+            }
+            this.totalNodos++;
+        }
+
+        public void InsertarObjetivos(Objetivos obj)
+        {
+            Nodo aux = new Nodo(obj);
+
+            if(inicio == null)
+            {
+                inicio = aux;
+            }else
+            {
+                Nodo puntero = inicio;
+                while (puntero.siguiente != null)
+                {
+                    puntero =puntero.siguiente;
+                }
+                puntero.siguiente = aux;
             }
             this.totalNodos++;
         }
