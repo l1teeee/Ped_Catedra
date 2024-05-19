@@ -13,9 +13,11 @@ namespace Ped_Catedra.Controlador
     public class RecordatorioControlador
     {
         RecordatorioModel recordatorioModel;
+        UsuarioModel usuarioModel;
         public RecordatorioControlador()
         {
             recordatorioModel = new RecordatorioModel();
+            usuarioModel = new UsuarioModel();
         }
 
         //Dibuja los recordatorios del usuario
@@ -40,6 +42,7 @@ namespace Ped_Catedra.Controlador
             // Iterar sobre los elementos de la lista y mostrarlos en la consola
             Nodo puntero = listaRecordatorios.inicio;
             int contador = 0;
+          
             while (puntero != null)
             {
                 contador++;
@@ -50,6 +53,7 @@ namespace Ped_Catedra.Controlador
                     "\n\nPrioridad: " + recordatorio.prioridadName +
                     "\n\nFecha: " + recordatorio.fecha +
                     "\n\nHora: " + recordatorio.hora, nodoFont, Brushes.White, x + 5, y + 5);
+              
                 if (contador % 3 == 0)
                 {
                     y += ySeparacion;
@@ -62,6 +66,9 @@ namespace Ped_Catedra.Controlador
                 puntero = puntero.siguiente;
             }
             panel.Height = y + ySeparacion;
+           
+            
+            
         }
 
         //Llena el comboBox con los recordatorios del usuario

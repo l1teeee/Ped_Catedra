@@ -205,9 +205,9 @@
             this.pnlFormulario.Controls.Add(this.cmbPrioridad);
             this.pnlFormulario.Controls.Add(this.txtTitulo);
             this.pnlFormulario.Controls.Add(this.label10);
-            this.pnlFormulario.Location = new System.Drawing.Point(396, 12);
+            this.pnlFormulario.Location = new System.Drawing.Point(7, 10);
             this.pnlFormulario.Name = "pnlFormulario";
-            this.pnlFormulario.Size = new System.Drawing.Size(369, 498);
+            this.pnlFormulario.Size = new System.Drawing.Size(374, 498);
             this.pnlFormulario.TabIndex = 26;
             this.pnlFormulario.Visible = false;
             // 
@@ -377,7 +377,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.ClientSize = new System.Drawing.Size(736, 520);
+            this.ClientSize = new System.Drawing.Size(388, 520);
             this.Controls.Add(this.dgvObjetivos);
             this.Controls.Add(this.pnlFormulario);
             this.Controls.Add(this.lblTitulo);

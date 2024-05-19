@@ -19,12 +19,15 @@ namespace Ped_Catedra
         ObjetivoModel objetivoModel;
         ObjetivoControlador objetivoControlador;
         Usuario User;
-        public DetalleObjetivo(string id)
+        DataGridView dgvObjetivos;
+        int idRecordatorio = 0;
+        public DetalleObjetivo(int id, DataGridView dgv)
         {
             InitializeComponent();
             objetivoModel = new ObjetivoModel();
             objetivoControlador = new ObjetivoControlador();
-            
+            dgvObjetivos = dgv;
+            idRecordatorio = id;
         }
 
         public void LlenarCampos(int id, string idUsuario)
@@ -69,7 +72,7 @@ namespace Ped_Catedra
                     MessageBox.Show("No se pudo modificar el objetivo", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
+            objetivoControlador.LlenatDataGrid(dgvObjetivos, idRecordatorio);
             this.Close();
         }
 
@@ -92,7 +95,7 @@ namespace Ped_Catedra
 
             DetalleRecordatorio detaRec = new DetalleRecordatorio(recForm.pnlRecordatorios);
 
-            objetivoControlador.LlenatDataGrid(detaRec.dgvObjetivos,idRecord);
+            objetivoControlador.LlenatDataGrid(dgvObjetivos, idRecordatorio);
 
             this.Close();
         }

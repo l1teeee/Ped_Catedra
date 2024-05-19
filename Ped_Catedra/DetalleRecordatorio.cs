@@ -50,6 +50,7 @@ namespace Ped_Catedra
             idUsu = recordatorio.usuarioId;
 
             objControlador.LlenatDataGrid(dgvObjetivos, idRecordatorio);
+            idRecor = idRecordatorio;
         }
 
         //Botón para modificar los datos en la bdd
@@ -150,7 +151,7 @@ namespace Ped_Catedra
                 DataGridViewRow selected = dgvObjetivos.Rows[e.RowIndex];
                 int id = Convert.ToInt32(selected.Cells["ID"].Value);
 
-                DetalleObjetivo detaObj = new DetalleObjetivo(idUsu);
+                DetalleObjetivo detaObj = new DetalleObjetivo(idRecor, dgvObjetivos);
                 detaObj.LlenarCampos(id, idUsu);
                 detaObj.Show();
             }
