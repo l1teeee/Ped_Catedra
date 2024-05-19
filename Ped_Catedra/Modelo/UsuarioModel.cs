@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using Ped_Catedra.Clases;
 
 namespace Ped_Catedra.Modelo
 {
@@ -273,6 +274,98 @@ namespace Ped_Catedra.Modelo
                 }
                 return builder.ToString();
             }
+        }
+
+        public int updateEstadoRecordatorios(string idUsuario)
+        {
+            int filas = 0;
+            using (MySqlConnection conexion = Conexion.ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+                    string qr = "UPDATE recordatorio SET estado = IF(Fecha<=CURRENT_DATE() AND Hora <= CURRENT_TIME(), 'Caducado', estado) WHERE UsuarioID = @id";
+                    MySqlCommand comando = new MySqlCommand(qr, conexion);
+
+                    comando.Parameters.AddWithValue("@id", idUsuario);
+                    filas = comando.ExecuteNonQuery();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al verificar informacion" +ex.Message, "Error", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                }
+            }
+            return filas;
+        }
+
+        public Lista obtenerCaducados(string usuario)
+        {
+            Lista lista = new Lista();
+            Recordatorio recordatorio;
+            using (MySqlConnection conexion = Conexion.ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+                    string query = "SELECT R.ID, R.Titulo, P.Prioridad AS Prioridad, R.Fecha, R.Hora, R.Descripcion FROM Recordatorio AS R INNER JOIN Prioridad AS P ON R.PrioridadID = P.ID " +
+                        "WHERE R.UsuarioID =@usuario AND R.Estado = 'Caducado'";
+                    MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@usuario", usuario);
+
+                    using (MySqlDataReader reader = comando.ExecuteReader())
+                    {
+                        //lista.LimpiarLista();
+                        while (reader.Read())
+                        {
+                            recordatorio = new Recordatorio();
+                            recordatorio.id = Convert.ToInt32(reader["ID"]);
+                            recordatorio.titulo = reader["Titulo"].ToString();
+                            recordatorio.prioridadName = reader["Prioridad"].ToString();
+                            recordatorio.fecha = ((DateTime)reader["Fecha"]).ToString("yyyy-MM-dd");
+                            recordatorio.hora = reader["Hora"].ToString();
+                            recordatorio.descripcion = reader["Descripcion"].ToString();
+                            lista.InsertarRecordatorio(recordatorio);
+                        }
+                    }
+
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al obtener los recordatorios: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return lista;
+        }
+
+        public string obtenerCorreo(string usuario)
+        {
+
+            string correo = null;
+
+            using( MySqlConnection conexion = Conexion.ObtenerConexion()){
+                try
+                {
+                    conexion.Open();
+                    string qr = "SELECT Correo FROM usuario WHERE ID = @id";
+                    MySqlCommand comando = new MySqlCommand(qr, conexion);
+                    comando.Parameters.AddWithValue("@id", usuario);
+                    using (MySqlDataReader reader = comando.ExecuteReader())
+                    {
+                        // Verificar si se obtuvo alguna fila
+                        if (reader.Read())
+                        {
+                            // Obtener el valor de la columna "Correo"
+                            correo = reader["Correo"].ToString();
+                        }
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al obtener el correo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
+            return correo;
         }
     }
 }

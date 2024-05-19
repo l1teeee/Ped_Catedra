@@ -259,9 +259,9 @@
         private System.Windows.Forms.Button btnPrioridad;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Panel pnlContenedor;
-        private System.Windows.Forms.Panel pnlRecordatorios;
         private System.Windows.Forms.ComboBox cmbRecordatorios;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnBuscar;
+        public System.Windows.Forms.Panel pnlRecordatorios;
     }
 }

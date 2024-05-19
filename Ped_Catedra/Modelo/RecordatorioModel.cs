@@ -89,7 +89,7 @@ namespace Ped_Catedra.Modelo
                 try
                 {
                     conexion.Open();
-                    string query = "SELECT R.ID, R.Titulo, P.Prioridad AS Prioridad, R.Fecha, R.Hora, R.Descripcion FROM Recordatorio AS R INNER JOIN Prioridad AS P ON R.PrioridadID = P.ID " +
+                    string query = "SELECT R.ID, R.Titulo, P.Prioridad AS Prioridad, R.Fecha, R.Hora, R.Descripcion, R.UsuarioID FROM Recordatorio AS R INNER JOIN Prioridad AS P ON R.PrioridadID = P.ID " +
                         "WHERE R.ID =@idRecordatorio AND R.Estado = 'Disponible'";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@idRecordatorio", idRecordatorio);
@@ -105,6 +105,7 @@ namespace Ped_Catedra.Modelo
                             recordatorio.fecha = ((DateTime)reader["Fecha"]).ToString("yyyy-MM-dd");
                             recordatorio.hora = reader["Hora"].ToString();
                             recordatorio.descripcion = reader["Descripcion"].ToString();
+                            recordatorio.usuarioId = reader["UsuarioID"].ToString();
                         }
                     }
 

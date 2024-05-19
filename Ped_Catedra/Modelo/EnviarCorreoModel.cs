@@ -55,5 +55,25 @@ namespace Ped_Catedra.Modelo
                 MessageBox.Show("Error al enviar correo electrónico: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public void EnviasCaducados(string destinatario, string asunto, string mensaje)
+        {
+            try
+            {
+                SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");
+                clienteSmtp.Port = 587;
+                clienteSmtp.EnableSsl = true;
+                clienteSmtp.UseDefaultCredentials = false;
+                clienteSmtp.Credentials = new NetworkCredential("cuponerarivas@gmail.com", "qukrhapiaxidtdfj");
+
+                MailMessage correo = new MailMessage("cuponerarivas@gmail.com", destinatario, asunto, mensaje);
+
+                clienteSmtp.Send(correo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al enviar correo electrónico: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

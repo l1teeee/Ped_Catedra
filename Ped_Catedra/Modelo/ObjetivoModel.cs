@@ -100,7 +100,7 @@ namespace Ped_Catedra.Modelo
             }
         }
 
-        public void EliminarObj(int idObjetivo)
+        public bool EliminarObj(int idObjetivo)
         {
             using(MySqlConnection conexion = Conexion.ObtenerConexion())
             {
@@ -111,16 +111,17 @@ namespace Ped_Catedra.Modelo
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@ID", idObjetivo);
                     comando.ExecuteNonQuery() ;
+                    return true;
                 }
                 catch (MySqlException ex)
                 {
                     MessageBox.Show("Error al eliminar el objetivo " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    
+                    return false;
                 }
             }
         }
 
-        public Lista obtenerObjetviosRecord(string idRecord)
+        public Lista obtenerObjetviosRecord(int idRecord)
         {
             Lista list = new Lista();
             Objetivos obj;
@@ -151,6 +152,36 @@ namespace Ped_Catedra.Modelo
                 }
             }
             return list;
+        }
+
+        public Objetivos obtenerObjetivo(int idObjetivo)
+        {
+            Objetivos obj = new Objetivos();
+            using (MySqlConnection conexion = Conexion.ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+                    string qr = "SELECT * FROM objetivos WHERE ID = @id";
+                    MySqlCommand comando = new MySqlCommand(qr, conexion);
+                    comando.Parameters.AddWithValue("@id", idObjetivo);
+
+                    using (MySqlDataReader adapter = comando.ExecuteReader())
+                    {
+                        while(adapter.Read())
+                        {
+                            obj.id = adapter.GetInt32("ID");
+                            obj.titulo = adapter["Titulo"].ToString();
+                            obj.descrip = adapter["Descripcion"].ToString();
+                            obj.idRecordatorio = Convert.ToInt32(adapter["IdRecordatorio"]);
+                        }
+                    }
+                }catch(MySqlException ex)
+                {
+                    MessageBox.Show("Error al obtener el objetivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return obj;
         }
     }
 }

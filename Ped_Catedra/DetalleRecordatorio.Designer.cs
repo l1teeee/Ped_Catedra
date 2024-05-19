@@ -51,9 +51,11 @@
             this.cmbPrioridad = new System.Windows.Forms.ComboBox();
             this.txtTitulo = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvObjetivos = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFormulario.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvObjetivos)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -342,17 +344,33 @@
             this.label10.TabIndex = 27;
             this.label10.Text = "Digite un titulo:";
             // 
-            // dataGridView1
+            // dgvObjetivos
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 371);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(364, 77);
-            this.dataGridView1.TabIndex = 27;
+            this.dgvObjetivos.AllowUserToAddRows = false;
+            this.dgvObjetivos.AllowUserToDeleteRows = false;
+            this.dgvObjetivos.BackgroundColor = System.Drawing.Color.White;
+            this.dgvObjetivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvObjetivos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.Descripcion});
+            this.dgvObjetivos.Location = new System.Drawing.Point(12, 371);
+            this.dgvObjetivos.Name = "dgvObjetivos";
+            this.dgvObjetivos.ReadOnly = true;
+            this.dgvObjetivos.Size = new System.Drawing.Size(364, 77);
+            this.dgvObjetivos.TabIndex = 27;
+            this.dgvObjetivos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvObjetivos_CellClick);
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
             // 
             // DetalleRecordatorio
             // 
@@ -360,7 +378,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.ClientSize = new System.Drawing.Size(736, 520);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvObjetivos);
             this.Controls.Add(this.pnlFormulario);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.btnEditar);
@@ -378,7 +396,7 @@
             this.Text = "Detalle Recordatorio";
             this.pnlFormulario.ResumeLayout(false);
             this.pnlFormulario.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvObjetivos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,6 +426,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        public System.Windows.Forms.DataGridView dgvObjetivos;
     }
 }

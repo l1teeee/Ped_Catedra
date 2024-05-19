@@ -31,14 +31,16 @@ namespace Ped_Catedra.Controlador
             }
         }
 
-        public void LlenatDataGrid(DataGridView dg, string record)
+        public void LlenatDataGrid(DataGridView dg, int record)
         {
             Lista listaObjetivos = objModel.obtenerObjetviosRecord(record);
             Nodo puntero = listaObjetivos.inicio;
             dg.Rows.Clear();
             while(puntero != null)
             {
-                Objetivos obj = puntero.
+                Objetivos obj = puntero.obj;
+                dg.Rows.Add(obj.id, obj.descrip);
+                puntero = puntero.siguiente;
             }
         }
     }

@@ -114,6 +114,12 @@
     <Compile Include="Controlador\ObjetivoControlador.cs" />
     <Compile Include="Controlador\PrioridadControlador.cs" />
     <Compile Include="Controlador\RecordatorioControlador.cs" />
+    <Compile Include="DetalleObjetivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetalleObjetivo.Designer.cs">
+      <DependentUpon>DetalleObjetivo.cs</DependentUpon>
+    </Compile>
     <Compile Include="DetalleRecordatorio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,9 @@
     <Compile Include="Clases\Usuario.cs" />
     <EmbeddedResource Include="AgregarObjetivo.resx">
       <DependentUpon>AgregarObjetivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetalleObjetivo.resx">
+      <DependentUpon>DetalleObjetivo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DetalleRecordatorio.resx">
       <DependentUpon>DetalleRecordatorio.cs</DependentUpon>

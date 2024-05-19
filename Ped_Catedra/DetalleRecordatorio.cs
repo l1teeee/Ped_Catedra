@@ -9,26 +9,31 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ped_Catedra.Modelo;
 using Ped_Catedra.Controlador;
+using Ped_Catedra.Clases;
 
 namespace Ped_Catedra
 {
     public partial class DetalleRecordatorio : Form
     {
         RecordatorioModel recordatorioModel;
+        ObjetivoControlador objControlador;
         PrioridadControlador ctrlPrioridad;
         string titulo = "";
         int idRecor = 0;
         string idUsu;
         Panel pnlMostrar;
+        
         public DetalleRecordatorio(Panel pnlRecordatorios)
         {
             InitializeComponent();
             recordatorioModel = new RecordatorioModel();
             ctrlPrioridad = new PrioridadControlador();
+            objControlador = new ObjetivoControlador();
             pnlMostrar = pnlRecordatorios;
             time.Format = DateTimePickerFormat.Time;
             time.ShowUpDown = true;
             date.MinDate = DateTime.Today;
+
         }
 
         //Llena los campos del recordatorio seleccionado
@@ -43,6 +48,8 @@ namespace Ped_Catedra
             lblFecha.Text = recordatorio.fecha;
             lblHora.Text = recordatorio.hora;
             idUsu = recordatorio.usuarioId;
+
+            objControlador.LlenatDataGrid(dgvObjetivos, idRecordatorio);
         }
 
         //Botón para modificar los datos en la bdd
@@ -136,5 +143,17 @@ namespace Ped_Catedra
             }
         }
 
+        private void dgvObjetivos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0 && e.ColumnIndex >=0)
+            {
+                DataGridViewRow selected = dgvObjetivos.Rows[e.RowIndex];
+                int id = Convert.ToInt32(selected.Cells["ID"].Value);
+
+                DetalleObjetivo detaObj = new DetalleObjetivo(idUsu);
+                detaObj.LlenarCampos(id, idUsu);
+                detaObj.Show();
+            }
+        }
     }
 }
