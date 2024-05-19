@@ -141,6 +141,7 @@ namespace Ped_Catedra.Modelo
                         {
                             obj = new Objetivos();
                             obj.id = reader.GetInt32("ID");
+                            obj.titulo = reader.GetString("Titulo");
                             obj.descrip = reader.GetString("Descripcion");
                             list.InsertarObjetivos(obj);
                         }

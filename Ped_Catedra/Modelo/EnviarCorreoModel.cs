@@ -36,6 +36,26 @@ namespace Ped_Catedra.Modelo
         }*/
 
         //Enviar correo
+        public void EnviarCorreo(string destinatario, string asunto, StringBuilder mensaje)
+        {
+            try
+            {
+                SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");
+                clienteSmtp.Port = 587;
+                clienteSmtp.EnableSsl = true;
+                clienteSmtp.UseDefaultCredentials = false;
+                clienteSmtp.Credentials = new NetworkCredential("cuponerarivas@gmail.com", "qukrhapiaxidtdfj");
+
+                MailMessage correo = new MailMessage("cuponerarivas@gmail.com", destinatario, asunto, mensaje.ToString());
+
+                clienteSmtp.Send(correo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al enviar correo electrónico: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public void EnviarCorreo(string destinatario, string asunto, string mensaje)
         {
             try

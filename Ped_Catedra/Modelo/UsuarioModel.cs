@@ -284,7 +284,12 @@ namespace Ped_Catedra.Modelo
                 try
                 {
                     conexion.Open();
-                    string qr = "UPDATE recordatorio SET estado = IF(Fecha<=CURRENT_DATE() AND Hora <= CURRENT_TIME(), 'Caducado', estado) WHERE UsuarioID = @id";
+                    string qr = @"UPDATE recordatorio
+                                SET Estado = 'Caducado'
+                                WHERE UsuarioID = @id
+                                AND Estado = 'Disponible'
+                                AND (Fecha <= CURRENT_DATE() 
+                                    OR (Fecha = CURRENT_DATE() AND Hora <= CURRENT_TIME()))";
                     MySqlCommand comando = new MySqlCommand(qr, conexion);
 
                     comando.Parameters.AddWithValue("@id", idUsuario);

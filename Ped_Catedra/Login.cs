@@ -87,6 +87,7 @@ namespace Ped_Catedra
 
                 //En este momento se actualizar y se valida que existan recordatorios ya vencidos
                 int actualizados = usuarioModel.updateEstadoRecordatorios(usuario);
+                MessageBox.Show("Prueba "+actualizados);
 
                 if (actualizados > 0)
                 {
@@ -94,22 +95,24 @@ namespace Ped_Catedra
 
                     Lista listaCaducados = usuarioModel.obtenerCaducados(usuario);
 
-                    string asunto = "Tienes recordatorios caducados, son los siguientes";
+                    string asunto = "Tienes recordatorios caducados";
 
                     Nodo puntero = listaCaducados.inicio;
 
-                    string mensaje = "Lista de Recordatorios";
+                    StringBuilder mensaje = new StringBuilder();
+                    mensaje.AppendLine("Lista de Recordatorios, son los siguientes");
+
                     int conta = 1;
 
                     while (puntero != null)
                     {
                         Recordatorio rec = puntero.recordatorio;
-                        mensaje += "\n Recordatorio N°" + conta;
-                        mensaje += "\n Titulo: " + rec.titulo;
-                        mensaje += "\n Descripcion: " + rec.descripcion;
-                        mensaje += "\n Prioridad: " + rec.prioridadName;
-                        mensaje += "\n Fecha: " + rec.fecha + "\t Hora: " + rec.hora;
-                        mensaje += "\n Objetivos:";
+                        mensaje.AppendLine($"\n\n Recordatorio N°{conta}");
+                        mensaje.AppendLine($" Titulo: {rec.titulo}");
+                        mensaje.AppendLine($" Descripcion: {rec.descripcion}");
+                        mensaje.AppendLine($" Prioridad: {rec.prioridadName}");
+                        mensaje.AppendLine($" Fecha: {rec.fecha}\t Hora: {rec.hora}");
+                        mensaje.AppendLine(" Objetivos:");
 
                         Lista listaObjetivos = objetivoModel.obtenerObjetviosRecord(rec.id);
 
@@ -117,19 +120,23 @@ namespace Ped_Catedra
 
                         if (punteroObjetivos == null)
                         {
-                            mensaje += "\n No posee objetivos este recordatorio";
+                            mensaje.AppendLine("No posee objetivos este recordatorio");
                         }
                         else
                         {
+                            int contaobj = 1;
                             while( punteroObjetivos != null)
                             {
                                 Objetivos obj = punteroObjetivos.obj;
-                                mensaje += "\n Titulo: " + obj.titulo;
-                                mensaje += "\n Descripcion: " + obj.descrip;
+                                mensaje.AppendLine($"\t Objetivo N°" + contaobj);
+                                mensaje.AppendLine($"\t Titulo: {obj.titulo}");
+                                mensaje.AppendLine($"\t Descripcion: {obj.descrip}");
+                                punteroObjetivos = punteroObjetivos.siguiente;
+                                contaobj++;
                             }
                         }
 
-                        
+                        puntero = puntero.siguiente;
                         conta++;
                     }
                     CorreoModel.EnviarCorreo(correo, asunto, mensaje);
