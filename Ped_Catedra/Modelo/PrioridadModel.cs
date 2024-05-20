@@ -46,7 +46,7 @@ namespace Ped_Catedra.Modelo
                 try
                 {
                     conexion.Open();
-                    string query = "SELECT * FROM prioridad WHERE IdUsuario = @usuario OR IdUsuario = 'admin' AND Estado = 'Disponible'";
+                    string query = "SELECT * FROM prioridad WHERE IdUsuario = @usuario AND Estado = 'Disponible' OR IdUsuario = 'admin'";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@usuario", idUsuario);
 
