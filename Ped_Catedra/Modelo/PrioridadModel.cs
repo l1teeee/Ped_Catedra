@@ -18,10 +18,11 @@ namespace Ped_Catedra.Modelo
                 try
                 {
                     conexion.Open();
-                    string query = "INSERT INTO prioridad (Prioridad, IdUsuario) " +
-                                   "VALUES (@prioridad, @usuario)";
+                    string query = "INSERT INTO prioridad (Prioridad, Estado, IdUsuario) " +
+                                   "VALUES (@prioridad, @estado, @usuario)";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@prioridad", nombrePriori);
+                    comando.Parameters.AddWithValue("@estado", "Disponible");
                     comando.Parameters.AddWithValue("@usuario", usuario);
                     comando.ExecuteNonQuery();
                     return true;
@@ -45,7 +46,7 @@ namespace Ped_Catedra.Modelo
                 try
                 {
                     conexion.Open();
-                    string query = "SELECT * FROM prioridad WHERE IdUsuario = @usuario OR IdUsuario = 'admin'";
+                    string query = "SELECT * FROM prioridad WHERE IdUsuario = @usuario OR IdUsuario = 'admin' AND Estado = 'Disponible'";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@usuario", idUsuario);
 
@@ -81,7 +82,7 @@ namespace Ped_Catedra.Modelo
                 try
                 {
                     conexion.Open();
-                    string query = "SELECT * FROM prioridad WHERE IdUsuario = @usuario";
+                    string query = "SELECT * FROM prioridad WHERE IdUsuario = @usuario AND Estado = 'Disponible'";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@usuario", idUsuario);
 
@@ -124,6 +125,28 @@ namespace Ped_Catedra.Modelo
                 catch (MySqlException ex)
                 {
                     MessageBox.Show("Error al modificar la prioridad: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
+        public bool EliminarRecor(int idPrioridad)
+        {
+            using (MySqlConnection conexion = Conexion.ObtenerConexion())
+            {
+                try
+                {
+                    conexion.Open();
+                    string query = "UPDATE prioridad SET Estado = @estado WHERE ID = @idPrioridad";
+                    MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@estado","Eliminado");
+                    comando.Parameters.AddWithValue("@idPrioridad", idPrioridad);
+                    comando.ExecuteNonQuery();
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Error al eliminar la prioridad: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }

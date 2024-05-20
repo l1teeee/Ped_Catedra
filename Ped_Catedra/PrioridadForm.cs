@@ -74,5 +74,41 @@ namespace Ped_Catedra
                 btnAgregar.Show();
             }
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (prioridadModel.EliminarRecor(idPrioridad))
+            {
+                MessageBox.Show("¡Se ha eliminado!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("No se pudo eliminar la prioridad.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            ctrlPrioridad.LlenarTabla(dgvPrioridades, datosUsu.id);
+            txtPrioridad.Clear();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if(txtPrioridad.Text != "" || txtPrioridad.Text != " ")
+            {
+                if (prioridadModel.ModificarRecor(txtPrioridad.Text, idPrioridad))
+                {
+                    MessageBox.Show("¡Se ha modificado!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo modificar la prioridad.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                ctrlPrioridad.LlenarTabla(dgvPrioridades, datosUsu.id);
+                txtPrioridad.Clear();
+
+            }
+            else
+            {
+                MessageBox.Show("Ingrese un nombre para la prioridad.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
