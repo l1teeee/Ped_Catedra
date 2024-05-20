@@ -148,21 +148,24 @@ namespace Ped_Catedra.Modelo
 
 
         //Eliminar un recordatorio
-        public void EliminarRecor(int idRecordatorio)
+        public bool EliminarRecor(int idRecordatorio)
         {
             using (MySqlConnection conexion = Conexion.ObtenerConexion())
             {
                 try
                 {
                     conexion.Open();
-                    string query = "DELETE FROM Recordatorio WHERE ID = @idRecordatorio";
+                    string query = "UPDATE Recordatorio SET Estado = @estado WHERE ID = @idRecordatorio";
                     MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@estado", "Eliminado");
                     comando.Parameters.AddWithValue("@idRecordatorio", idRecordatorio);
                     comando.ExecuteNonQuery();
+                    return true;
                 }
                 catch (MySqlException ex)
                 {
-                    MessageBox.Show("Error al eliminar el recordatorio: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error al modificar el recordatorio: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
             }
         }

@@ -62,7 +62,15 @@ namespace Ped_Catedra
         //Eliminar recordatorio
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            recordatorioModel.EliminarRecor(int.Parse(cmbRecordatorios.SelectedItem.ToString().Split('-')[0].Trim()));
+            if (recordatorioModel.EliminarRecor(int.Parse(cmbRecordatorios.SelectedItem.ToString().Split('-')[0].Trim())))
+            {
+                MessageBox.Show("¡Recordatorio eliminado!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("No se pudo eliminar el recordatorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
             pnlRecordatorios.Invalidate();
             LlenarCmbRecordatorio();
             OcultarElementos(datosUsu.id);
