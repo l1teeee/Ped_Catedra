@@ -194,6 +194,7 @@
             // 
             // pnlFormulario
             // 
+            this.pnlFormulario.Controls.Add(this.dgvObjetivos);
             this.pnlFormulario.Controls.Add(this.btnModificar);
             this.pnlFormulario.Controls.Add(this.label7);
             this.pnlFormulario.Controls.Add(this.label8);
@@ -205,9 +206,9 @@
             this.pnlFormulario.Controls.Add(this.cmbPrioridad);
             this.pnlFormulario.Controls.Add(this.txtTitulo);
             this.pnlFormulario.Controls.Add(this.label10);
-            this.pnlFormulario.Location = new System.Drawing.Point(7, 10);
+            this.pnlFormulario.Location = new System.Drawing.Point(7, 12);
             this.pnlFormulario.Name = "pnlFormulario";
-            this.pnlFormulario.Size = new System.Drawing.Size(374, 498);
+            this.pnlFormulario.Size = new System.Drawing.Size(374, 618);
             this.pnlFormulario.TabIndex = 26;
             this.pnlFormulario.Visible = false;
             // 
@@ -219,7 +220,7 @@
             this.btnModificar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnModificar.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btnModificar.Location = new System.Drawing.Point(23, 447);
+            this.btnModificar.Location = new System.Drawing.Point(9, 556);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(324, 40);
             this.btnModificar.TabIndex = 42;
@@ -353,7 +354,7 @@
             this.dgvObjetivos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.Descripcion});
-            this.dgvObjetivos.Location = new System.Drawing.Point(12, 371);
+            this.dgvObjetivos.Location = new System.Drawing.Point(0, 456);
             this.dgvObjetivos.Name = "dgvObjetivos";
             this.dgvObjetivos.ReadOnly = true;
             this.dgvObjetivos.Size = new System.Drawing.Size(364, 77);
@@ -377,8 +378,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.ClientSize = new System.Drawing.Size(388, 520);
-            this.Controls.Add(this.dgvObjetivos);
+            this.ClientSize = new System.Drawing.Size(393, 642);
             this.Controls.Add(this.pnlFormulario);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.btnEditar);
